@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/follow-up-question-layer.schema.json",
+  "title": "Resume Core Guided Intake Follow-Up Question Layer",
+  "type": "object",
+  "$defs": {
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "FollowUpQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "question"],
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/FieldId"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "FollowUpQuestionSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "followUpQuestionSetId",
+        "reportId",
+        "templateId",
+        "profileId",
+        "questions",
+        "generatedAt"
+      ],
+      "properties": {
+        "followUpQuestionSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/FollowUpQuestion"
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

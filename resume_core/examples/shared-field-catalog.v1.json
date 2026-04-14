@@ -1,0 +1,95 @@
+{
+  "catalogId": "resume-core-fields",
+  "version": "1.0.0",
+  "fields": [
+    {
+      "fieldId": "basic.name",
+      "label": "Name",
+      "dataType": "string",
+      "cardinality": "one",
+      "path": "basic.name",
+      "description": "Candidate display name"
+    },
+    {
+      "fieldId": "basic.email",
+      "label": "Email",
+      "dataType": "email",
+      "cardinality": "one",
+      "path": "basic.email",
+      "description": "Primary contact email"
+    },
+    {
+      "fieldId": "links.github",
+      "label": "GitHub",
+      "dataType": "url",
+      "cardinality": "one",
+      "path": "links.github",
+      "description": "Primary GitHub profile link",
+      "aliases": ["github", "GitHub"]
+    },
+    {
+      "fieldId": "summary.items",
+      "label": "Summary bullets",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "summary.items",
+      "description": "Short summary bullets shown near the top of the resume"
+    },
+    {
+      "fieldId": "education[].school",
+      "label": "Education school",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].school",
+      "description": "School name for each education entry"
+    },
+    {
+      "fieldId": "education[].major",
+      "label": "Education major",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].major",
+      "description": "Major or field of study for each education entry"
+    },
+    {
+      "fieldId": "education[].degree",
+      "label": "Education degree",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].degree",
+      "description": "Degree label for each education entry"
+    },
+    {
+      "fieldId": "project[].name",
+      "label": "Project name",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "project[].name",
+      "description": "Project title for each project entry"
+    },
+    {
+      "fieldId": "project[].role",
+      "label": "Project role",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "project[].role",
+      "description": "Role or responsibility label for each project entry"
+    },
+    {
+      "fieldId": "project[].techStack",
+      "label": "Project tech stack",
+      "dataType": "list",
+      "cardinality": "many",
+      "path": "project[].techStack",
+      "description": "Key technologies associated with each project entry"
+    },
+    {
+      "fieldId": "project[].bullets",
+      "label": "Project bullets",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "project[].bullets",
+      "description": "Bullet list describing contribution and impact for each project"
+    }
+  ]
+}

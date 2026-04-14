@@ -1,0 +1,155 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/intake-layer.schema.json",
+  "title": "Resume Core Intake Layer",
+  "type": "object",
+  "$defs": {
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "SessionPhase": {
+      "type": "string",
+      "enum": [
+        "template-selection",
+        "source-check",
+        "input-bundling",
+        "routing",
+        "handed-off"
+      ]
+    },
+    "SessionRoute": {
+      "type": "string",
+      "enum": ["undecided", "import-existing", "guided-intake"]
+    },
+    "SessionStatus": {
+      "type": "string",
+      "enum": ["active", "paused", "completed", "abandoned"]
+    },
+    "IntakeSession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "sessionId",
+        "templateId",
+        "templateVersion",
+        "hasExistingMaterial",
+        "documentIds",
+        "phase",
+        "route",
+        "status",
+        "createdAt",
+        "updatedAt"
+      ],
+      "properties": {
+        "sessionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateVersion": {
+          "$ref": "#/$defs/Version"
+        },
+        "hasExistingMaterial": {
+          "type": "boolean"
+        },
+        "documentIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "phase": {
+          "$ref": "#/$defs/SessionPhase"
+        },
+        "route": {
+          "$ref": "#/$defs/SessionRoute"
+        },
+        "status": {
+          "$ref": "#/$defs/SessionStatus"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "hasExistingMaterial": {
+                "const": false
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "documentIds": {
+                "maxItems": 0
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "route": {
+                "const": "import-existing"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "hasExistingMaterial": {
+                "const": true
+              },
+              "documentIds": {
+                "minItems": 1
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "phase": {
+                "const": "handed-off"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "route": {
+                "enum": ["import-existing", "guided-intake"]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": {
+                "const": "completed"
+              }
+            }
+          },
+          "then": {
+            "properties": {
+              "phase": {
+                "const": "handed-off"
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

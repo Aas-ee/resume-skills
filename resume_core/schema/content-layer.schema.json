@@ -1,0 +1,258 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/content-layer.schema.json",
+  "title": "Resume Core Content Layer",
+  "type": "object",
+  "$defs": {
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "DocumentType": {
+      "type": "string",
+      "enum": ["resume", "pdf", "markdown", "notes", "project-doc"]
+    },
+    "SourceLocator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "value"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["line-range", "paragraph", "page-range", "section"]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "SourceDocument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["documentId", "type", "format", "sourceRef", "metadata"],
+      "oneOf": [
+        {
+          "required": ["rawText"]
+        },
+        {
+          "required": ["rawContentRef"]
+        }
+      ],
+      "properties": {
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "$ref": "#/$defs/DocumentType"
+        },
+        "format": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rawText": {
+          "type": "string",
+          "minLength": 1
+        },
+        "rawContentRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "metadata": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["title", "language", "importedAt"],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "language": {
+              "type": "string",
+              "minLength": 1
+            },
+            "importedAt": {
+              "type": "string",
+              "format": "date-time"
+            }
+          }
+        }
+      }
+    },
+    "SourceExtraction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "extractionId",
+        "documentId",
+        "fragmentText",
+        "sourceLocator",
+        "candidateFieldIds",
+        "confidence"
+      ],
+      "properties": {
+        "extractionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "documentId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fragmentText": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceLocator": {
+          "$ref": "#/$defs/SourceLocator"
+        },
+        "candidateFieldIds": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ResumeProfile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profileId", "fieldValues", "provenance", "profileStatus", "updatedAt"],
+      "properties": {
+        "profileId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "fieldValues": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/FieldId"
+          },
+          "additionalProperties": true
+        },
+        "provenance": {
+          "type": "object",
+          "minProperties": 1,
+          "propertyNames": {
+            "$ref": "#/$defs/FieldId"
+          },
+          "additionalProperties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          }
+        },
+        "profileStatus": {
+          "type": "string",
+          "enum": ["draft", "partial", "ready"]
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "GapConflict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "reason"],
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/FieldId"
+        },
+        "reason": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "GapQuestion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "question"],
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/FieldId"
+        },
+        "question": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "GapReport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "reportId",
+        "templateId",
+        "profileId",
+        "missingRequired",
+        "missingRecommended",
+        "conflicts",
+        "questions",
+        "generatedAt"
+      ],
+      "properties": {
+        "reportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "missingRequired": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "missingRecommended": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "conflicts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GapConflict"
+          }
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/GapQuestion"
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

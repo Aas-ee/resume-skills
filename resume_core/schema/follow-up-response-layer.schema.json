@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/follow-up-response-layer.schema.json",
+  "title": "Resume Core Guided Intake Follow-Up Response Layer",
+  "type": "object",
+  "$defs": {
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "JsonLikeValue": {
+      "type": [
+        "string",
+        "number",
+        "boolean",
+        "null",
+        "array",
+        "object"
+      ],
+      "items": {
+        "$ref": "#/$defs/JsonLikeValue"
+      },
+      "additionalProperties": {
+        "$ref": "#/$defs/JsonLikeValue"
+      }
+    },
+    "FollowUpResponseSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "followUpResponseSetId",
+        "followUpQuestionSetId",
+        "reportId",
+        "templateId",
+        "profileId",
+        "responses",
+        "updatedAt"
+      ],
+      "properties": {
+        "followUpResponseSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "followUpQuestionSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profileId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responses": {
+          "type": "object",
+          "propertyNames": {
+            "$ref": "#/$defs/FieldId"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonLikeValue"
+          }
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

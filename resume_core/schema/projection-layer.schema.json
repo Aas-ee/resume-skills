@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/projection-layer.schema.json",
+  "title": "Resume Core Profile Projection Layer",
+  "type": "object",
+  "$defs": {
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "ProjectionResumeProfile": {
+      "allOf": [
+        {
+          "$ref": "https://resume-core.local/schema/content-layer.schema.json#/$defs/ResumeProfile"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "profileStatus": {
+              "const": "partial"
+            }
+          }
+        }
+      ]
+    },
+    "GuidedIntakeProfileProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectionId",
+        "responseSetId",
+        "questionSetId",
+        "templateId",
+        "templateVersion",
+        "profile"
+      ],
+      "properties": {
+        "projectionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "responseSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "questionSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateVersion": {
+          "$ref": "#/$defs/Version"
+        },
+        "profile": {
+          "$ref": "#/$defs/ProjectionResumeProfile"
+        }
+      }
+    },
+    "FollowUpProfileProjection": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "projectionId",
+        "followUpResponseSetId",
+        "followUpQuestionSetId",
+        "reportId",
+        "templateId",
+        "templateVersion",
+        "baseProfileId",
+        "profile"
+      ],
+      "properties": {
+        "projectionId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "followUpResponseSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "followUpQuestionSetId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "reportId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateVersion": {
+          "$ref": "#/$defs/Version"
+        },
+        "baseProfileId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "profile": {
+          "$ref": "#/$defs/ProjectionResumeProfile"
+        }
+      }
+    }
+  }
+}

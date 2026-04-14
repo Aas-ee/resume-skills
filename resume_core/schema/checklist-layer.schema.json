@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/checklist-layer.schema.json",
+  "title": "Resume Core Guided Intake Checklist Layer",
+  "type": "object",
+  "$defs": {
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "GuidedIntakeChecklist": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "checklistId",
+        "templateId",
+        "templateVersion",
+        "requiredFields",
+        "optionalFields",
+        "repeatableFields",
+        "generatedAt"
+      ],
+      "properties": {
+        "checklistId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "templateVersion": {
+          "$ref": "#/$defs/Version"
+        },
+        "requiredFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "optionalFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "repeatableFields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/FieldId"
+          }
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  }
+}

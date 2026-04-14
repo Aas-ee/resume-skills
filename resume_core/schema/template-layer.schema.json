@@ -1,0 +1,203 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://resume-core.local/schema/template-layer.schema.json",
+  "title": "Resume Core Template Layer",
+  "type": "object",
+  "$defs": {
+    "FieldId": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(\\[\\])?(\\.[a-zA-Z0-9]+(\\[\\])?)*$"
+    },
+    "Version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "FieldRequirement": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "required", "repeatable", "order"],
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/FieldId"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "repeatable": {
+          "type": "boolean"
+        },
+        "order": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "promptHint": {
+          "type": "string"
+        }
+      }
+    },
+    "FieldDefinition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fieldId", "label", "dataType", "cardinality", "path", "description"],
+      "properties": {
+        "fieldId": {
+          "$ref": "#/$defs/FieldId"
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "dataType": {
+          "type": "string",
+          "enum": ["string", "list", "richtext", "dateRange", "url", "email"]
+        },
+        "cardinality": {
+          "type": "string",
+          "enum": ["one", "many"]
+        },
+        "path": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SharedFieldCatalog": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["catalogId", "version", "fields"],
+      "properties": {
+        "catalogId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/$defs/Version"
+        },
+        "fields": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/FieldDefinition"
+          }
+        }
+      }
+    },
+    "TemplateManifest": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "templateId",
+        "name",
+        "version",
+        "description",
+        "target",
+        "sectionOrder",
+        "fieldRequirements",
+        "renderSpecRef",
+        "origin"
+      ],
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/$defs/Version"
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        },
+        "target": {
+          "type": "string",
+          "enum": ["typora", "markdown", "html", "pdf", "generic"]
+        },
+        "sectionOrder": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "fieldRequirements": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/FieldRequirement"
+          }
+        },
+        "renderSpecRef": {
+          "type": "string",
+          "minLength": 1
+        },
+        "origin": {
+          "type": "string",
+          "enum": ["builtin", "user-promoted", "imported"]
+        }
+      }
+    },
+    "TemplateRegistryEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["templateId", "version", "source", "visibility", "status"],
+      "properties": {
+        "templateId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "version": {
+          "$ref": "#/$defs/Version"
+        },
+        "source": {
+          "type": "string",
+          "enum": ["builtin", "user", "imported"]
+        },
+        "visibility": {
+          "type": "string",
+          "enum": ["private", "shared", "official"]
+        },
+        "status": {
+          "type": "string",
+          "enum": ["active", "archived"]
+        }
+      }
+    },
+    "TemplateRegistry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["registryId", "entries"],
+      "properties": {
+        "registryId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "entries": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/TemplateRegistryEntry"
+          }
+        },
+        "defaultTemplateId": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

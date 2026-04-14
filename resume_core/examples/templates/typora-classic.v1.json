@@ -1,0 +1,89 @@
+{
+  "templateId": "typora-classic",
+  "name": "Typora Classic Resume",
+  "version": "1.0.0",
+  "description": "Markdown plus light HTML Typora resume template with print-oriented CSS.",
+  "target": "typora",
+  "sectionOrder": ["header", "education", "links", "summary", "projects"],
+  "fieldRequirements": [
+    {
+      "fieldId": "basic.name",
+      "required": true,
+      "repeatable": false,
+      "order": 10,
+      "promptHint": "Candidate name shown in the header"
+    },
+    {
+      "fieldId": "basic.email",
+      "required": true,
+      "repeatable": false,
+      "order": 20,
+      "promptHint": "Primary email shown near the top"
+    },
+    {
+      "fieldId": "links.github",
+      "required": false,
+      "repeatable": false,
+      "order": 30,
+      "promptHint": "GitHub link if it strengthens the profile"
+    },
+    {
+      "fieldId": "summary.items",
+      "required": false,
+      "repeatable": true,
+      "order": 40,
+      "promptHint": "Two to three summary bullets"
+    },
+    {
+      "fieldId": "education[].school",
+      "required": true,
+      "repeatable": true,
+      "order": 50,
+      "promptHint": "School name for each education entry"
+    },
+    {
+      "fieldId": "education[].major",
+      "required": true,
+      "repeatable": true,
+      "order": 60,
+      "promptHint": "Major for each education entry"
+    },
+    {
+      "fieldId": "education[].degree",
+      "required": true,
+      "repeatable": true,
+      "order": 70,
+      "promptHint": "Degree label for each education entry"
+    },
+    {
+      "fieldId": "project[].name",
+      "required": true,
+      "repeatable": true,
+      "order": 80,
+      "promptHint": "Project title"
+    },
+    {
+      "fieldId": "project[].role",
+      "required": true,
+      "repeatable": true,
+      "order": 90,
+      "promptHint": "Role label shown on the project row"
+    },
+    {
+      "fieldId": "project[].techStack",
+      "required": true,
+      "repeatable": true,
+      "order": 100,
+      "promptHint": "Short technology list for the project heading"
+    },
+    {
+      "fieldId": "project[].bullets",
+      "required": true,
+      "repeatable": true,
+      "order": 110,
+      "promptHint": "Bullets describing contribution and impact"
+    }
+  ],
+  "renderSpecRef": "renderers/typora-classic@1.0.0",
+  "origin": "builtin"
+}
