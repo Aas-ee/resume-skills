@@ -104,13 +104,14 @@ Follow these rules:
 - persist stable structured-session state after each transition so the next host turn can resume deterministically
 - once the structured session is `completed`, hand the resulting projection back to the normal resume drafting path instead of continuing intake questions
 - if no active structured session exists and no explicit structured-start inputs are available, stay in the normal freeform rewrite path instead of guessing that structured flow should start
-- external hosts can drive the outer entrypoint through `.claude/skills/resume/agent_intake_cli.py`, which accepts a JSON request on stdin or via `--input-file` and returns a JSON envelope for host-side routing
-- use `.claude/skills/resume/host_cli.py` only when a host needs direct structured-session control instead of the higher-level intake entrypoint
+- external hosts should drive the outer public entrypoint through `resume_runtime/agent_intake_cli.py`, which accepts a JSON request on stdin or via `--input-file` and returns a JSON envelope for host-side routing
+- use `resume_runtime/host_cli.py` only when a host needs direct structured-session control instead of the higher-level intake entrypoint
+- `.claude/skills/resume/agent_intake_cli.py` and `.claude/skills/resume/host_cli.py` remain Claude-side compatibility wrappers around those public CLIs
 
 Host usage example:
 
 ```bash
-python3 .claude/skills/resume/agent_intake_cli.py \
+python3 resume_runtime/agent_intake_cli.py \
   --session-store .claude/skills/resume/.runtime/host_sessions \
   --input-file request.json
 ```
@@ -162,17 +163,17 @@ Success response shape:
   "outcome": {
     "mode": "structured_intake",
     "prompt_directive": "ask_current_batch",
-    "prompt": "...",
-    "structured_outcome": {
-      "prompt_directive": "ask_current_batch",
-      "session_id": "host-session-...",
-      "next_action_kind": "ask_batch",
-      "current_batch": [{"field_id": "required.role", "question": "..."}]
-    },
-    "material_result": {
-      "parse_status": "parsed",
-      "document_ids": ["source-existing-resume-md"]
-    }
+    "prompt": "..."
+  },
+  "structured_outcome": {
+    "prompt_directive": "ask_current_batch",
+    "session_id": "host-session-...",
+    "next_action_kind": "ask_batch",
+    "current_batch": [{"field_id": "required.role", "question": "..."}]
+  },
+  "material_result": {
+    "parse_status": "parsed",
+    "document_ids": ["source-existing-resume-md"]
   }
 }
 ```

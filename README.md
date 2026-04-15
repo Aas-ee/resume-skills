@@ -2,13 +2,14 @@
 
 [中文说明 / Chinese README](README.zh-CN.md)
 
-A privacy-safe public snapshot of a resume skill runtime, JSON CLIs, schemas, and template artifacts.
+A privacy-safe public snapshot of a reusable resume runtime package, public JSON CLIs, schemas, and template artifacts.
 
 ## What is in this repo
 
 This repository currently publishes the reusable, non-personal parts of the project:
 
-- `.claude/skills/resume/` — the resume skill prompt, runtime, and JSON CLIs
+- `resume_runtime/` — the reusable public runtime package and public JSON CLI entrypoints for host-agnostic resume intake workflows
+- `.claude/skills/resume/` — the Claude-specific skill prompt layer, prompt rendering helpers, and compatibility wrappers around the public CLIs/runtime
 - `resume_core/schema/` — JSON schema contracts for the template, intake, checklist, question, response, and projection layers
 - `resume_core/examples/README.md` — guide to the synthetic public examples and recommended reading order
 - `resume_core/examples/shared-field-catalog.v1.json` — shared field catalog example
@@ -42,10 +43,12 @@ Use this when a host wants one outer entrypoint that can:
 - hand off to drafting when enough information is available
 
 ```bash
-python3 .claude/skills/resume/agent_intake_cli.py \
+python3 resume_runtime/agent_intake_cli.py \
   --session-store .claude/skills/resume/.runtime/host_sessions \
   --input-file request.json
 ```
+
+The Claude-side wrapper at `.claude/skills/resume/agent_intake_cli.py` remains available for compatibility, but external hosts should treat `resume_runtime/agent_intake_cli.py` as the public entrypoint.
 
 Request version:
 
@@ -56,10 +59,12 @@ Request version:
 Use this when a host wants direct control over structured session turns.
 
 ```bash
-python3 .claude/skills/resume/host_cli.py \
+python3 resume_runtime/host_cli.py \
   --session-store .claude/skills/resume/.runtime/host_sessions \
   --input-file request.json
 ```
+
+The Claude-side wrapper at `.claude/skills/resume/host_cli.py` remains available for compatibility, but hosts integrating the reusable runtime should use `resume_runtime/host_cli.py` directly.
 
 Request version:
 
@@ -105,16 +110,16 @@ Note: the private repository contains additional examples and tests that are not
 
 This repository is suitable for:
 
-- reading the runtime and CLI design
-- reusing the JSON contracts
+- reading the reusable runtime and CLI design
+- reusing the public `resume_runtime` package and JSON contracts
 - understanding the host-facing request and response envelopes
 - studying the synthetic public examples in `resume_core/examples/README.md`
-- building a host adapter around the published skill runtime
+- building a host adapter around the published host-agnostic runtime while keeping Claude-only prompt rendering in `.claude/skills/resume/`
 
 It now includes a small synthetic public examples pack for the `typora-classic` and `markdown-basic` templates.
 
 It is still not a complete public starter kit because it does not publish:
 
 - private working materials or real resume content
-- a public demo app or packaged SDK outside `.claude/`
+- a public demo app built on top of the published runtime package
 - PDF or HTML final resume outputs
