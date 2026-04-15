@@ -1,0 +1,52 @@
+{
+  "questionSetId": "guided-intake-question-set-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "questions": [
+    {
+      "fieldId": "basic.name",
+      "question": "Please provide Candidate name shown in the header."
+    },
+    {
+      "fieldId": "basic.email",
+      "question": "Please provide Primary email shown near the top."
+    },
+    {
+      "fieldId": "education[].school",
+      "question": "Please provide School name for each education entry."
+    },
+    {
+      "fieldId": "education[].major",
+      "question": "Please provide Major for each education entry."
+    },
+    {
+      "fieldId": "education[].degree",
+      "question": "Please provide Degree label for each education entry."
+    },
+    {
+      "fieldId": "project[].name",
+      "question": "Please provide Project title."
+    },
+    {
+      "fieldId": "project[].role",
+      "question": "Please provide Role label shown on the project row."
+    },
+    {
+      "fieldId": "project[].techStack",
+      "question": "Please provide Short technology list for the project heading."
+    },
+    {
+      "fieldId": "project[].bullets",
+      "question": "Please provide Bullets describing contribution and impact."
+    },
+    {
+      "fieldId": "links.github",
+      "question": "Please provide GitHub link if it strengthens the profile."
+    },
+    {
+      "fieldId": "summary.items",
+      "question": "Please provide Two to three summary bullets."
+    }
+  ],
+  "generatedAt": "2026-04-10T11:00:00Z"
+}

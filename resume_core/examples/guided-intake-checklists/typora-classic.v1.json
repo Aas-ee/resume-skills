@@ -1,0 +1,31 @@
+{
+  "checklistId": "guided-intake-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "requiredFields": [
+    "basic.name",
+    "basic.email",
+    "education[].school",
+    "education[].major",
+    "education[].degree",
+    "project[].name",
+    "project[].role",
+    "project[].techStack",
+    "project[].bullets"
+  ],
+  "optionalFields": [
+    "links.github",
+    "summary.items"
+  ],
+  "repeatableFields": [
+    "summary.items",
+    "education[].school",
+    "education[].major",
+    "education[].degree",
+    "project[].name",
+    "project[].role",
+    "project[].techStack",
+    "project[].bullets"
+  ],
+  "generatedAt": "2026-04-10T10:00:00Z"
+}

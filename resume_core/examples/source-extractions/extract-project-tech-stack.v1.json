@@ -1,0 +1,11 @@
+{
+  "extractionId": "extract-project-tech-stack",
+  "documentId": "source-existing-resume-md",
+  "fragmentText": "TypeScript / Node.js / Express / CLI / Automation",
+  "sourceLocator": {
+    "kind": "line-range",
+    "value": "7-7"
+  },
+  "candidateFieldIds": ["project[].techStack"],
+  "confidence": 0.96
+}

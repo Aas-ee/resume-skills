@@ -134,7 +134,7 @@ Minimal request shape:
       "document_id": "source-existing-resume-md",
       "source_label": "existing-resume.md",
       "media_type": "text/markdown",
-      "text": "# Alex Resume"
+      "text": "# Alex Example"
     }
   ],
   "drafting_started": false

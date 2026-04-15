@@ -1,0 +1,11 @@
+{
+  "extractionId": "extract-project-name",
+  "documentId": "source-existing-resume-md",
+  "fragmentText": "Example Stream",
+  "sourceLocator": {
+    "kind": "line-range",
+    "value": "6-6"
+  },
+  "candidateFieldIds": ["project[].name"],
+  "confidence": 0.98
+}

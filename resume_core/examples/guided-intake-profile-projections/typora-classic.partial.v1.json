@@ -1,0 +1,28 @@
+{
+  "projectionId": "guided-intake-profile-projection-typora-classic",
+  "responseSetId": "guided-intake-response-set-typora-classic",
+  "questionSetId": "guided-intake-question-set-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "profile": {
+    "profileId": "profile-from-guided-intake-response-set-typora-classic",
+    "fieldValues": {
+      "basic.email": "alex@example.com",
+      "project[].bullets": [
+        "Built a reusable resume intake CLI for multiple hosts.",
+        "Added contract validation for guided and follow-up example artifacts."
+      ],
+      "summary.items": [
+        "Backend engineer focused on developer tools and structured content pipelines.",
+        "Maintains synthetic public fixtures that explain the resume workflow end to end."
+      ]
+    },
+    "provenance": {
+      "basic.email": ["guided-intake-response-set-typora-classic"],
+      "project[].bullets": ["guided-intake-response-set-typora-classic"],
+      "summary.items": ["guided-intake-response-set-typora-classic"]
+    },
+    "profileStatus": "partial",
+    "updatedAt": "2026-04-11T10:00:00Z"
+  }
+}

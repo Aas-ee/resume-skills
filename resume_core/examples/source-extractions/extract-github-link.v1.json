@@ -1,0 +1,11 @@
+{
+  "extractionId": "extract-github-link",
+  "documentId": "source-existing-resume-md",
+  "fragmentText": "GitHub: https://github.com/alex-example",
+  "sourceLocator": {
+    "kind": "line-range",
+    "value": "4-4"
+  },
+  "candidateFieldIds": ["links.github"],
+  "confidence": 0.97
+}
