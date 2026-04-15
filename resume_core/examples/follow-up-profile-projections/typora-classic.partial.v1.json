@@ -1,0 +1,36 @@
+{
+  "projectionId": "follow-up-profile-projection-for-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "followUpResponseSetId": "follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "followUpQuestionSetId": "follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "reportId": "gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "baseProfileId": "profile-from-guided-intake-response-set-typora-classic",
+  "profile": {
+    "profileId": "profile-from-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+    "fieldValues": {
+      "basic.email": "alex@example.com",
+      "basic.name": "Alex Example",
+      "education[].major": "Software Engineering",
+      "project[].bullets": [
+        "Built a reusable resume intake CLI for multiple hosts.",
+        "Added contract validation for guided and follow-up example artifacts."
+      ],
+      "project[].techStack": "Java, Spring Boot, MySQL, Redis",
+      "summary.items": [
+        "Backend engineer focused on developer tools and structured content pipelines.",
+        "Maintains synthetic public fixtures that explain the resume workflow end to end."
+      ]
+    },
+    "provenance": {
+      "basic.email": ["guided-intake-response-set-typora-classic"],
+      "basic.name": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "education[].major": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].bullets": ["guided-intake-response-set-typora-classic"],
+      "project[].techStack": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "summary.items": ["guided-intake-response-set-typora-classic"]
+    },
+    "profileStatus": "partial",
+    "updatedAt": "2026-04-12T10:00:00Z"
+  }
+}

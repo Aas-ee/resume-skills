@@ -1,0 +1,29 @@
+{
+  "checklistId": "guided-intake-markdown-basic",
+  "templateId": "markdown-basic",
+  "templateVersion": "1.0.0",
+  "requiredFields": [
+    "basic.name",
+    "basic.email",
+    "education[].school",
+    "education[].major",
+    "education[].degree",
+    "project[].name",
+    "project[].role",
+    "project[].bullets"
+  ],
+  "optionalFields": [
+    "links.github",
+    "summary.items"
+  ],
+  "repeatableFields": [
+    "summary.items",
+    "education[].school",
+    "education[].major",
+    "education[].degree",
+    "project[].name",
+    "project[].role",
+    "project[].bullets"
+  ],
+  "generatedAt": "2026-04-10T10:05:00Z"
+}

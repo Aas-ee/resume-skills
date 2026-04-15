@@ -1,0 +1,15 @@
+{
+  "responseSetId": "guided-intake-response-set-markdown-basic",
+  "templateId": "markdown-basic",
+  "templateVersion": "1.0.0",
+  "questionSetId": "guided-intake-question-set-markdown-basic",
+  "responses": {
+    "basic.name": "Alex Example",
+    "basic.email": "alex@example.com",
+    "project[].bullets": [
+      "Implemented a Markdown-first resume template workflow for public examples.",
+      "Validated question-set and response-set contracts with unittest."
+    ]
+  },
+  "updatedAt": "2026-04-11T10:05:00Z"
+}

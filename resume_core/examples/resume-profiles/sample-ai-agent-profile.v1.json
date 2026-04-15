@@ -1,0 +1,19 @@
+{
+  "profileId": "sample-ai-agent-profile",
+  "fieldValues": {
+    "basic.name": "Alex Example",
+    "links.github": "https://github.com/alex-example",
+    "project[].name": ["Example Stream"],
+    "project[].role": ["Open Source Maintainer"],
+    "project[].techStack": [["TypeScript", "Node.js", "Express", "CLI", "Automation"]]
+  },
+  "provenance": {
+    "basic.name": ["extract-basic-name"],
+    "links.github": ["extract-github-link"],
+    "project[].name": ["extract-project-name"],
+    "project[].role": ["extract-project-role"],
+    "project[].techStack": ["extract-project-tech-stack"]
+  },
+  "profileStatus": "partial",
+  "updatedAt": "2026-04-09T12:30:00Z"
+}

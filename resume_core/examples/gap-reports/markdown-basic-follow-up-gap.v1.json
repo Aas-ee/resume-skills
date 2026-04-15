@@ -1,0 +1,33 @@
+{
+  "reportId": "gap-for-profile-from-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic-markdown-basic",
+  "templateId": "markdown-basic",
+  "profileId": "profile-from-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+  "missingRequired": [
+    "education[].major",
+    "education[].degree",
+    "project[].name"
+  ],
+  "missingRecommended": [
+    "summary.items"
+  ],
+  "conflicts": [],
+  "questions": [
+    {
+      "fieldId": "summary.items",
+      "question": "Please provide Short summary bullets."
+    },
+    {
+      "fieldId": "education[].major",
+      "question": "Please provide Major name."
+    },
+    {
+      "fieldId": "education[].degree",
+      "question": "Please provide Degree label."
+    },
+    {
+      "fieldId": "project[].name",
+      "question": "Please provide Project title."
+    }
+  ],
+  "generatedAt": "2026-04-12T10:15:00Z"
+}

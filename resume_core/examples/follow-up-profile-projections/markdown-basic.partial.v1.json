@@ -1,0 +1,33 @@
+{
+  "projectionId": "follow-up-profile-projection-for-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+  "followUpResponseSetId": "follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+  "followUpQuestionSetId": "follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+  "reportId": "gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+  "templateId": "markdown-basic",
+  "templateVersion": "1.0.0",
+  "baseProfileId": "profile-from-guided-intake-response-set-markdown-basic",
+  "profile": {
+    "profileId": "profile-from-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic",
+    "fieldValues": {
+      "basic.email": "alex@example.com",
+      "basic.name": "Alex Example",
+      "education[].school": "Example University",
+      "links.github": "https://github.com/alex-example",
+      "project[].bullets": [
+        "Implemented a Markdown-first resume template workflow for public examples.",
+        "Validated question-set and response-set contracts with unittest."
+      ],
+      "project[].role": "Backend Engineer"
+    },
+    "provenance": {
+      "basic.email": ["guided-intake-response-set-markdown-basic"],
+      "basic.name": ["guided-intake-response-set-markdown-basic"],
+      "education[].school": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic"],
+      "links.github": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic"],
+      "project[].bullets": ["guided-intake-response-set-markdown-basic"],
+      "project[].role": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-markdown-basic-markdown-basic"]
+    },
+    "profileStatus": "partial",
+    "updatedAt": "2026-04-12T10:05:00Z"
+  }
+}

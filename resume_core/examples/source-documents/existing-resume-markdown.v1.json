@@ -1,0 +1,12 @@
+{
+  "documentId": "source-existing-resume-md",
+  "type": "resume",
+  "format": "markdown",
+  "sourceRef": "public://examples/existing-resume.md",
+  "rawText": "# Alex Example\n\nEmail: alex@example.com\nGitHub: https://github.com/alex-example\n\n### Example Stream | Open Source Maintainer\nTech Stack: TypeScript / Node.js / Express / CLI / Automation\n",
+  "metadata": {
+    "title": "Synthetic existing resume draft",
+    "language": "en",
+    "importedAt": "2026-04-09T12:00:00Z"
+  }
+}
