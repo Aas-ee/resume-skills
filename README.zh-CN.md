@@ -2,13 +2,14 @@
 
 [English README](README.md)
 
-这是一个经过隐私筛选后公开的简历 skill 仓库快照，当前主要包含 runtime、JSON CLI、schema，以及模板相关的公共产物。
+这是一个经过隐私筛选后公开的简历工作流仓库快照，当前主要包含可复用的 runtime package、公共 JSON CLI、schema，以及模板相关的公共产物。
 
 ## 这个仓库当前包含什么
 
 当前公开的是可复用、非个人化的部分：
 
-- `.claude/skills/resume/` —— resume skill 的提示词、runtime 和 JSON CLI
+- `resume_runtime/` —— 可复用的公共 runtime package，以及面向外部宿主的公共 JSON CLI 入口
+- `.claude/skills/resume/` —— Claude 专用的 skill 提示词层、prompt 渲染辅助，以及对公共 runtime / CLI 的兼容包装
 - `resume_core/schema/` —— 模板层、intake 层、checklist 层、question 层、response 层、projection 层的 JSON Schema 合约
 - `resume_core/examples/README.md` —— 纯虚构 public examples 的导读和推荐阅读顺序
 - `resume_core/examples/shared-field-catalog.v1.json` —— 公共字段目录示例
@@ -42,10 +43,12 @@
 - 在信息足够时把流程交回 drafting
 
 ```bash
-python3 .claude/skills/resume/agent_intake_cli.py \
+python3 resume_runtime/agent_intake_cli.py \
   --session-store .claude/skills/resume/.runtime/host_sessions \
   --input-file request.json
 ```
+
+`.claude/skills/resume/agent_intake_cli.py` 这个 Claude 侧脚本仍然保留为兼容包装；但对外部宿主来说，`resume_runtime/agent_intake_cli.py` 才是公共入口。
 
 请求版本：
 
@@ -56,10 +59,12 @@ python3 .claude/skills/resume/agent_intake_cli.py \
 适用于宿主想直接控制 structured session turn 的场景。
 
 ```bash
-python3 .claude/skills/resume/host_cli.py \
+python3 resume_runtime/host_cli.py \
   --session-store .claude/skills/resume/.runtime/host_sessions \
   --input-file request.json
 ```
+
+`.claude/skills/resume/host_cli.py` 仍保留为 Claude 集成侧的兼容包装；如果宿主想直接接入可复用 runtime，应使用 `resume_runtime/host_cli.py`。
 
 请求版本：
 
@@ -105,16 +110,16 @@ python3 resume_core/scripts/validate_resume_core.py
 
 这个仓库目前适合用来：
 
-- 阅读 runtime 和 CLI 的设计
-- 复用 JSON contract
+- 阅读可复用 runtime 和 CLI 的设计
+- 复用公开的 `resume_runtime` package 与 JSON contract
 - 理解宿主侧请求 / 响应 envelope
 - 结合 `resume_core/examples/README.md` 阅读纯虚构的公开 examples 链路
-- 基于已公开的 skill runtime 做自己的 host adapter
+- 基于已公开的 host-agnostic runtime 构建自己的 host adapter，同时把 Claude 专用 prompt 渲染保留在 `.claude/skills/resume/`
 
 它现在已经包含一套面向 `typora-classic` 和 `markdown-basic` 的小型 synthetic public examples。
 
 它仍然不是一个完整的公开 starter kit，因为还没有公开：
 
 - 私有工作材料或真实简历内容
-- `.claude/` 之外的 demo app / 独立 SDK 打包
+- 基于当前已公开 runtime package 的 public demo app
 - PDF / HTML 形式的最终简历产物
