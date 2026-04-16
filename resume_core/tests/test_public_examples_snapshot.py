@@ -67,6 +67,9 @@ class PublicExamplesSnapshotTests(unittest.TestCase):
         self.assert_relative_paths_exist(
             [
                 "examples/templates/typora-classic.v1.json",
+                "examples/template-assets/typora-classic/template.md",
+                "examples/template-assets/typora-classic/template.html",
+                "examples/template-assets/typora-classic/style.css",
                 "examples/intake-sessions/typora-import-existing.v1.json",
                 "examples/intake-sessions/typora-guided-empty.v1.json",
                 "examples/guided-intake-checklists/typora-classic.v1.json",
@@ -121,6 +124,9 @@ class PublicExamplesSnapshotTests(unittest.TestCase):
         self.assert_relative_paths_exist(
             [
                 "examples/templates/markdown-basic.v1.json",
+                "examples/template-assets/markdown-basic/template.md",
+                "examples/template-assets/markdown-basic/template.html",
+                "examples/template-assets/markdown-basic/style.css",
                 "examples/intake-sessions/markdown-manual-override.v1.json",
                 "examples/guided-intake-checklists/markdown-basic.v1.json",
                 "examples/guided-intake-question-sets/markdown-basic.v1.json",

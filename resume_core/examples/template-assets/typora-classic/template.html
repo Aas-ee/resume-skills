@@ -1,0 +1,32 @@
+<div class="resume-page">
+  <header class="resume-header">
+    <h1>{{basic.name}}</h1>
+    <p>Email: {{basic.email}}</p>
+    {{#links.github}}<p>GitHub: {{links.github}}</p>{{/links.github}}
+  </header>
+  <section>
+    <h2>Summary</h2>
+    <ul>
+      {{#summary.items}}<li>{{.}}</li>{{/summary.items}}
+    </ul>
+  </section>
+  <section>
+    <h2>Education</h2>
+    {{#education}}
+    <article class="education-item">
+      <h3>{{school}}</h3>
+      <p>{{degree}} · {{major}}</p>
+    </article>
+    {{/education}}
+  </section>
+  <section>
+    <h2>Projects</h2>
+    {{#project}}
+    <article class="project-item">
+      <h3>{{name}} | {{role}}</h3>
+      <p>Tech Stack: {{techStack}}</p>
+      <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
+    </article>
+    {{/project}}
+  </section>
+</div>

@@ -5,6 +5,30 @@ from typing import Any
 from resume.runtime.host_conversation_adapter import HostConversationOutcome
 
 
+def render_template_selection_prompt(cards: list[dict[str, object]]) -> str:
+    lines = ["先选一个模板："]
+    for index, card in enumerate(cards, start=1):
+        title = str(card["title"])
+        template_id = str(card["template_id"])
+        style_label = str(card["style_label"])
+        use_cases = " / ".join(str(item) for item in card["use_cases"])
+        required_content_summary = "；".join(
+            str(item) for item in card["required_content_summary"]
+        )
+        storage_scope = str(card["storage_scope"])
+        lines.extend(
+            [
+                f"{index}. {title} [{template_id}]",
+                f"   风格：{style_label}",
+                f"   适用：{use_cases}",
+                f"   需要：{required_content_summary}",
+                f"   来源：{storage_scope}",
+            ]
+        )
+    lines.append("你也可以说‘上传我的模板’，或者说‘基于 1 改一个更紧凑的版本’。")
+    return "\n".join(lines)
+
+
 def render_ask_existing_material_prompt() -> str:
     return (
         "你现在有现成简历吗？可以直接发 PDF、Markdown、纯文本，或者项目笔记也行。"

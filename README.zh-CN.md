@@ -9,12 +9,17 @@
 当前公开的是可复用、非个人化的部分：
 
 - `resume_runtime/` —— 可复用的公共 runtime package，以及面向外部宿主的公共 JSON CLI 入口
+- `resume_runtime/template_catalog_cli.py` —— 用于列出模板卡片和派生 template context 的公共 JSON CLI
+- `resume_runtime/render_cli.py` —— 根据模板 manifest 和 profile 渲染 markdown/html/css bundle 的公共 JSON CLI
+- `resume_runtime/template_store_cli.py` —— 用于保存和晋升可复用模板包的公共 JSON CLI
+- `skills/resume/SKILL.md` —— 面向所有 agent 的共享简历工作流定义
 - `.claude/skills/resume/` —— Claude 专用的 skill 提示词层、prompt 渲染辅助，以及对公共 runtime / CLI 的兼容包装
 - `resume_core/schema/` —— 模板层、intake 层、checklist 层、question 层、response 层、projection 层的 JSON Schema 合约
 - `resume_core/examples/README.md` —— 纯虚构 public examples 的导读和推荐阅读顺序
 - `resume_core/examples/shared-field-catalog.v1.json` —— 公共字段目录示例
 - `resume_core/examples/template-registry.v1.json` —— 模板注册表示例
 - `resume_core/examples/templates/` —— 可公开的模板清单示例
+- `resume_core/examples/template-assets/` —— 公共 manifest 引用的内置 markdown/html/css 模板资源目录
 - `resume_core/scripts/validate_resume_core.py` —— schema 和工件校验脚本
 
 ## 哪些内容被刻意不公开
@@ -30,6 +35,13 @@
 
 所以当前公开仓库更像是一个**安全可公开的 runtime + contract 快照**，而不是一个已经完整脱敏、可直接端到端复现的示例仓库。
 
+## 共享 skill 定义
+
+非 Claude agent 应优先阅读 `skills/resume/SKILL.md`。
+
+这个共享 skill 描述的是公共工作流，并把 `resume_runtime/` 作为正式支持的共享接口。
+`.claude/skills/resume/` 下的内容仍然保留，但它们属于 Claude 适配层兼容包装，不应再作为跨 agent 的唯一契约。
+
 ## 主要入口
 
 ### 更高层的 agent intake CLI
@@ -44,7 +56,7 @@
 
 ```bash
 python3 resume_runtime/agent_intake_cli.py \
-  --session-store .claude/skills/resume/.runtime/host_sessions \
+  --session-store resume_runtime/.runtime/host_sessions \
   --input-file request.json
 ```
 
@@ -60,7 +72,7 @@ python3 resume_runtime/agent_intake_cli.py \
 
 ```bash
 python3 resume_runtime/host_cli.py \
-  --session-store .claude/skills/resume/.runtime/host_sessions \
+  --session-store resume_runtime/.runtime/host_sessions \
   --input-file request.json
 ```
 

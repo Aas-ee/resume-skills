@@ -25,6 +25,26 @@ def _validate_response_fields(responses: dict[str, Any], allowed_field_ids: set[
         raise ValueError("unknown response field: " + ", ".join(unknown_field_ids))
 
 
+def derive_guided_intake_checklist(
+    manifest: dict[str, Any],
+    *,
+    generated_at: str,
+) -> dict[str, Any]:
+    requirements = sorted(
+        manifest["fieldRequirements"],
+        key=lambda requirement: requirement["order"],
+    )
+    return {
+        "checklistId": f"guided-intake-{manifest['templateId']}",
+        "templateId": manifest["templateId"],
+        "templateVersion": manifest["version"],
+        "requiredFields": [item["fieldId"] for item in requirements if item["required"]],
+        "optionalFields": [item["fieldId"] for item in requirements if not item["required"]],
+        "repeatableFields": [item["fieldId"] for item in requirements if item["repeatable"]],
+        "generatedAt": generated_at,
+    }
+
+
 def derive_guided_intake_question_set(
     manifest: dict[str, Any],
     checklist: dict[str, Any],

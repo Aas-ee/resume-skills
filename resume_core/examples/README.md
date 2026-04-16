@@ -18,6 +18,28 @@ Read these first:
 - `templates/typora-classic.v1.json`
 - `templates/markdown-basic.v1.json`
 
+## Template asset directories
+
+Each built-in template now points to concrete assets in `template-assets/`:
+
+- `template.md` — markdown-first editable template
+- `template.html` — HTML rendering template
+- `style.css` — reusable style asset for Typora-first preview and later reuse
+
+## Built-in template gallery
+
+Each built-in template manifest includes a `previewCard` block that hosts can surface as a template-selection card before intake starts.
+
+Hosts can list those cards through the public catalog CLI:
+
+```bash
+python3 resume_runtime/template_catalog_cli.py \
+  --examples-root resume_core/examples \
+  --generated-at 2026-04-16T12:00:00Z
+```
+
+The CLI response includes one `card` per template, derived directly from each manifest's `previewCard`, alongside the matching `template_context` payload for downstream intake.
+
 ## Raw material to extracted facts
 
 This chain shows how one synthetic source document becomes extracted facts and then a reusable profile:

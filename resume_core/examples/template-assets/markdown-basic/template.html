@@ -1,0 +1,17 @@
+<div class="markdown-basic">
+  <h1>{{basic.name}}</h1>
+  <p>{{basic.email}}</p>
+  {{#links.github}}<p>{{links.github}}</p>{{/links.github}}
+  <h2>Summary</h2>
+  <ul>{{#summary.items}}<li>{{.}}</li>{{/summary.items}}</ul>
+  <h2>Education</h2>
+  <ul>{{#education}}<li>{{school}} · {{degree}} · {{major}}</li>{{/education}}</ul>
+  <h2>Projects</h2>
+  {{#project}}
+  <section>
+    <h3>{{name}}</h3>
+    <p>Role: {{role}}</p>
+    <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
+  </section>
+  {{/project}}
+</div>

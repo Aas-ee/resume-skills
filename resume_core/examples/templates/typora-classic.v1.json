@@ -85,5 +85,17 @@
     }
   ],
   "renderSpecRef": "renderers/typora-classic@1.0.0",
-  "origin": "builtin"
+  "origin": "builtin",
+  "assetRefs": {
+    "markdown": "../template-assets/typora-classic/template.md",
+    "html": "../template-assets/typora-classic/template.html",
+    "css": "../template-assets/typora-classic/style.css"
+  },
+  "previewCard": {
+    "title": "Typora Classic Resume",
+    "styleLabel": "Print-oriented classic layout",
+    "useCases": ["社招后端", "开源项目经历", "Typora 预览"],
+    "requiredContentSummary": ["姓名和邮箱", "至少一个项目", "教育经历"]
+  },
+  "storageScope": "builtin"
 }

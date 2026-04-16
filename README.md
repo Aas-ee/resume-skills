@@ -9,12 +9,17 @@ A privacy-safe public snapshot of a reusable resume runtime package, public JSON
 This repository currently publishes the reusable, non-personal parts of the project:
 
 - `resume_runtime/` — the reusable public runtime package and public JSON CLI entrypoints for host-agnostic resume intake workflows
+- `resume_runtime/template_catalog_cli.py` — public JSON CLI for listing template cards and derived template context
+- `resume_runtime/render_cli.py` — public JSON CLI for rendering markdown/html/css bundles from a template manifest and profile
+- `resume_runtime/template_store_cli.py` — public JSON CLI for saving and promoting reusable template packages
+- `skills/resume/SKILL.md` — the shared agent-neutral resume workflow definition
 - `.claude/skills/resume/` — the Claude-specific skill prompt layer, prompt rendering helpers, and compatibility wrappers around the public CLIs/runtime
 - `resume_core/schema/` — JSON schema contracts for the template, intake, checklist, question, response, and projection layers
 - `resume_core/examples/README.md` — guide to the synthetic public examples and recommended reading order
 - `resume_core/examples/shared-field-catalog.v1.json` — shared field catalog example
 - `resume_core/examples/template-registry.v1.json` — template registry example
 - `resume_core/examples/templates/` — public template manifest examples
+- `resume_core/examples/template-assets/` — built-in markdown/html/css template asset directories referenced by public manifests
 - `resume_core/scripts/validate_resume_core.py` — schema and artifact validator
 
 ## What is intentionally not published
@@ -30,6 +35,13 @@ Examples of excluded material:
 
 This means the public repository is a safe runtime-and-contract snapshot, not yet a fully reproducible end-to-end example pack.
 
+## Shared skill definition
+
+Non-Claude agents should start from the shared skill definition at `skills/resume/SKILL.md`.
+
+That shared skill describes the public workflow and points to `resume_runtime/` as the supported shared surface.
+Claude-specific wrappers under `.claude/skills/resume/` remain available, but they are adapter-layer compatibility helpers rather than the primary cross-agent contract.
+
 ## Main entrypoints
 
 ### Higher-level agent intake CLI
@@ -44,7 +56,7 @@ Use this when a host wants one outer entrypoint that can:
 
 ```bash
 python3 resume_runtime/agent_intake_cli.py \
-  --session-store .claude/skills/resume/.runtime/host_sessions \
+  --session-store resume_runtime/.runtime/host_sessions \
   --input-file request.json
 ```
 
@@ -60,7 +72,7 @@ Use this when a host wants direct control over structured session turns.
 
 ```bash
 python3 resume_runtime/host_cli.py \
-  --session-store .claude/skills/resume/.runtime/host_sessions \
+  --session-store resume_runtime/.runtime/host_sessions \
   --input-file request.json
 ```
 

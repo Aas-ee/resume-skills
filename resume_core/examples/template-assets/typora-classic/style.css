@@ -1,0 +1,18 @@
+.resume-page {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  color: #222;
+  line-height: 1.5;
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+.resume-header {
+  border-bottom: 2px solid #222;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+}
+
+.project-item,
+.education-item {
+  margin-bottom: 12px;
+}

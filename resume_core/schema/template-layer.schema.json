@@ -92,6 +92,56 @@
         }
       }
     },
+    "TemplateAssetRefs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["markdown", "html", "css"],
+      "properties": {
+        "markdown": {
+          "type": "string",
+          "minLength": 1
+        },
+        "html": {
+          "type": "string",
+          "minLength": 1
+        },
+        "css": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "TemplatePreviewCard": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "styleLabel", "useCases", "requiredContentSummary"],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "styleLabel": {
+          "type": "string",
+          "minLength": 1
+        },
+        "useCases": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "requiredContentSummary": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
     "TemplateManifest": {
       "type": "object",
       "additionalProperties": false,
@@ -104,7 +154,10 @@
         "sectionOrder",
         "fieldRequirements",
         "renderSpecRef",
-        "origin"
+        "origin",
+        "assetRefs",
+        "previewCard",
+        "storageScope"
       ],
       "properties": {
         "templateId": {
@@ -148,6 +201,16 @@
         "origin": {
           "type": "string",
           "enum": ["builtin", "user-promoted", "imported"]
+        },
+        "assetRefs": {
+          "$ref": "#/$defs/TemplateAssetRefs"
+        },
+        "previewCard": {
+          "$ref": "#/$defs/TemplatePreviewCard"
+        },
+        "storageScope": {
+          "type": "string",
+          "enum": ["builtin", "user", "candidate"]
         }
       }
     },

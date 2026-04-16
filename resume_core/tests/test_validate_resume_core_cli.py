@@ -6,6 +6,10 @@ import unittest
 from copy import deepcopy
 from pathlib import Path
 
+WORKTREE_ROOT = Path(__file__).resolve().parents[2]
+if str(WORKTREE_ROOT) not in sys.path:
+    sys.path.insert(0, str(WORKTREE_ROOT))
+
 from resume_core.scripts import validate_resume_core
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -47,6 +51,22 @@ class ResumeCoreValidationScriptTests(unittest.TestCase):
             ],
             actual_values=[
                 (item["templateId"], item["version"]) for item in artifacts["manifests"]
+            ],
+        )
+
+    def test_load_manifest_records_keeps_template_paths(self):
+        records = validate_resume_core.load_manifest_records()
+        expected_paths = sorted((validate_resume_core.ROOT / "examples" / "templates").glob("*.json"))
+
+        self.assertEqual([record["path"] for record in records], expected_paths)
+        self.assertEqual(
+            [(record["manifest"]["templateId"], record["manifest"]["version"]) for record in records],
+            [
+                (
+                    validate_resume_core.load_json(path)["templateId"],
+                    validate_resume_core.load_json(path)["version"],
+                )
+                for path in expected_paths
             ],
         )
 
@@ -165,6 +185,24 @@ class ResumeCoreValidationScriptTests(unittest.TestCase):
             result.stderr,
         )
 
+    def test_validation_script_rejects_missing_template_asset(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_root = Path(temp_dir) / "resume_core"
+            shutil.copytree(ROOT, temp_root)
+            missing_asset = (
+                temp_root
+                / "examples"
+                / "template-assets"
+                / "typora-classic"
+                / "template.md"
+            )
+            missing_asset.unlink()
+
+            result = self.run_validation_script(temp_root)
+
+        self.assertNotEqual(result.returncode, 0)
+        self.assertIn("missing template asset for typora-classic:markdown", result.stderr)
+
     def test_load_required_json_collection_rejects_empty_directory(self):
         with tempfile.TemporaryDirectory() as temp_dir:
             with self.assertRaisesRegex(
@@ -174,6 +212,30 @@ class ResumeCoreValidationScriptTests(unittest.TestCase):
                 validate_resume_core.load_required_json_collection(
                     Path(temp_dir), "template manifests"
                 )
+
+    def test_validate_template_asset_refs_rejects_missing_asset_file(self):
+        artifacts = validate_resume_core.load_example_artifacts()
+        artifacts["manifest_records"][0] = deepcopy(artifacts["manifest_records"][0])
+        artifacts["manifest_records"][0]["manifest"] = deepcopy(
+            artifacts["manifest_records"][0]["manifest"]
+        )
+        artifacts["manifest_records"][0]["manifest"]["assetRefs"]["markdown"] = "../template-assets/missing/template.md"
+
+        with self.assertRaisesRegex(ValueError, "missing template asset for"):
+            validate_resume_core.validate_template_asset_refs(artifacts)
+
+    def test_validate_template_asset_refs_rejects_out_of_tree_asset_path(self):
+        artifacts = validate_resume_core.load_example_artifacts()
+        artifacts["manifest_records"][0] = deepcopy(artifacts["manifest_records"][0])
+        artifacts["manifest_records"][0]["manifest"] = deepcopy(
+            artifacts["manifest_records"][0]["manifest"]
+        )
+        artifacts["manifest_records"][0]["manifest"]["assetRefs"]["markdown"] = "../../../README.md"
+
+        with self.assertRaisesRegex(
+            ValueError, "template asset ref must stay within template-assets"
+        ):
+            validate_resume_core.validate_template_asset_refs(artifacts)
 
     def test_validate_integrity_rejects_duplicate_manifest_field_requirements(self):
         def mutate(artifacts):

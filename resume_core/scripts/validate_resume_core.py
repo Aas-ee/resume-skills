@@ -60,12 +60,19 @@ def load_required_json_collection(directory: Path, label: str) -> list[Any]:
     return [load_json(path) for path in paths]
 
 
+def load_manifest_records() -> list[dict[str, Any]]:
+    return [
+        {"path": path, "manifest": load_json(path)}
+        for path in sorted((EXAMPLES / "templates").glob("*.json"))
+    ]
+
+
 def load_example_artifacts() -> dict[str, Any]:
+    manifest_records = load_manifest_records()
     return {
         "catalog": load_json(EXAMPLES / "shared-field-catalog.v1.json"),
-        "manifests": load_required_json_collection(
-            EXAMPLES / "templates", "template manifests"
-        ),
+        "manifest_records": manifest_records,
+        "manifests": [record["manifest"] for record in manifest_records],
         "registry": load_json(EXAMPLES / "template-registry.v1.json"),
         "source_document": load_json(
             EXAMPLES / "source-documents" / "existing-resume-markdown.v1.json"
@@ -938,6 +945,24 @@ def validate_follow_up_artifact_integrity(
                 raise ValueError(f"unknown follow-up profile projection field: {field_id}")
 
 
+def validate_template_asset_refs(artifacts: dict[str, Any]) -> None:
+    asset_root = (EXAMPLES / "template-assets").resolve()
+    for record in artifacts["manifest_records"]:
+        manifest = record["manifest"]
+        manifest_path = record["path"]
+        for asset_name, asset_ref in manifest["assetRefs"].items():
+            asset_path = (manifest_path.parent / asset_ref).resolve()
+            if asset_root not in asset_path.parents:
+                raise ValueError(
+                    "template asset ref must stay within template-assets for "
+                    f"{manifest['templateId']}:{asset_name}:{asset_ref}"
+                )
+            if not asset_path.is_file():
+                raise ValueError(
+                    f"missing template asset for {manifest['templateId']}:{asset_name}:{asset_ref}"
+                )
+
+
 def validate_integrity(artifacts: dict[str, Any]) -> None:
     catalog_fields = {item["fieldId"] for item in artifacts["catalog"]["fields"]}
     document_ids = {artifacts["source_document"]["documentId"]}
@@ -956,6 +981,7 @@ def validate_integrity(artifacts: dict[str, Any]) -> None:
 def main() -> int:
     artifacts = load_example_artifacts()
     validate_schemas(artifacts)
+    validate_template_asset_refs(artifacts)
     validate_integrity(artifacts)
     print("resume-core validation ok")
     return 0
