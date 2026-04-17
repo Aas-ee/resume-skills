@@ -5,27 +5,44 @@
   "requiredFields": [
     "basic.name",
     "basic.email",
-    "education[].school",
-    "education[].major",
-    "education[].degree",
+    "required.role",
+    "project[].date",
     "project[].name",
     "project[].role",
-    "project[].techStack",
-    "project[].bullets"
+    "project[].bullets",
+    "education[].school",
+    "education[].degree",
+    "education[].major"
   ],
   "optionalFields": [
+    "basic.nameEn",
+    "basic.phone",
     "links.github",
-    "summary.items"
+    "summary.items",
+    "skills.items",
+    "work[].date",
+    "work[].company",
+    "work[].role",
+    "work[].bullets",
+    "project[].techStack",
+    "education[].date"
   ],
   "repeatableFields": [
     "summary.items",
-    "education[].school",
-    "education[].major",
-    "education[].degree",
+    "skills.items",
+    "work[].date",
+    "work[].company",
+    "work[].role",
+    "work[].bullets",
+    "project[].date",
     "project[].name",
     "project[].role",
     "project[].techStack",
-    "project[].bullets"
+    "project[].bullets",
+    "education[].date",
+    "education[].school",
+    "education[].degree",
+    "education[].major"
   ],
   "generatedAt": "2026-04-10T10:00:00Z"
 }

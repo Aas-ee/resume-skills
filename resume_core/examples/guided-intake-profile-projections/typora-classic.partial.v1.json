@@ -7,20 +7,24 @@
   "profile": {
     "profileId": "profile-from-guided-intake-response-set-typora-classic",
     "fieldValues": {
+      "basic.name": "Alex Example",
       "basic.email": "alex@example.com",
-      "project[].bullets": [
-        "Built a reusable resume intake CLI for multiple hosts.",
-        "Added contract validation for guided and follow-up example artifacts."
-      ],
+      "required.role": "Software Engineer",
       "summary.items": [
-        "Backend engineer focused on developer tools and structured content pipelines.",
-        "Maintains synthetic public fixtures that explain the resume workflow end to end."
+        "Builds reusable workflow tooling.",
+        "Turns structured intake into production-ready artifacts."
+      ],
+      "project[].bullets": [
+        "Published synthetic examples that explain the resume workflow end to end.",
+        "Turned structured intake data into reusable rendering and validation fixtures."
       ]
     },
     "provenance": {
+      "basic.name": ["guided-intake-response-set-typora-classic"],
       "basic.email": ["guided-intake-response-set-typora-classic"],
-      "project[].bullets": ["guided-intake-response-set-typora-classic"],
-      "summary.items": ["guided-intake-response-set-typora-classic"]
+      "required.role": ["guided-intake-response-set-typora-classic"],
+      "summary.items": ["guided-intake-response-set-typora-classic"],
+      "project[].bullets": ["guided-intake-response-set-typora-classic"]
     },
     "profileStatus": "partial",
     "updatedAt": "2026-04-11T10:00:00Z"

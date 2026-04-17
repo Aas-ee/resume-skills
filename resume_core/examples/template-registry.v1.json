@@ -11,7 +11,7 @@
     {
       "templateId": "markdown-basic",
       "version": "1.0.0",
-      "source": "user",
+      "source": "builtin",
       "visibility": "official",
       "status": "active"
     }

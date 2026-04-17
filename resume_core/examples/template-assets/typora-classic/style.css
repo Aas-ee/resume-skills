@@ -1,0 +1,201 @@
+:root {
+  --accent: #4a89cf;
+  --text: #111111;
+  --muted: #4b4b4b;
+  --line: #2f2f2f;
+  --date-col: 170px;
+  --side-col: 140px;
+  --project-gap: 10px;
+  --label-gap: 14px;
+}
+
+html,
+body {
+  background: #ffffff;
+}
+
+body {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 26px 34px 36px;
+  color: var(--text);
+  font-family: "Times New Roman", "Noto Serif SC", "Songti SC", "SimSun", serif;
+  font-size: 17px;
+  line-height: 1.5;
+}
+
+.resume-page {
+  width: 100%;
+}
+
+.resume-header,
+.entry-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.resume-header {
+  margin-bottom: 14px;
+}
+
+.resume-header td {
+  padding: 2px 0;
+  vertical-align: top;
+}
+
+.resume-header .label {
+  width: 160px;
+  padding-right: var(--label-gap);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.resume-header .value {
+  font-size: 16px;
+}
+
+.resume-header tr:first-child td {
+  color: var(--accent);
+  font-size: 20px;
+  font-weight: 700;
+  padding-bottom: 5px;
+}
+
+.resume-header tr:last-child td {
+  padding-bottom: 10px;
+  border-bottom: 4px solid var(--accent);
+}
+
+.resume-header .emphasis {
+  color: var(--accent);
+  font-weight: 700;
+}
+
+h2 {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin: 12px 0 6px;
+  color: var(--accent);
+  font-size: 17px;
+  font-weight: 700;
+}
+
+h2::after {
+  content: "";
+  flex: 1;
+  border-bottom: 2px solid var(--line);
+  transform: translateY(-3px);
+}
+
+.entry-table {
+  margin-bottom: 4px;
+}
+
+.project-table {
+  margin-top: var(--project-gap);
+}
+
+.project-table:first-of-type {
+  margin-top: 4px;
+}
+
+.entry-table td {
+  padding: 1px 0;
+  vertical-align: top;
+}
+
+.entry-table .date {
+  width: var(--date-col);
+  white-space: nowrap;
+}
+
+.entry-table .main {
+  font-weight: 700;
+  text-align: center;
+}
+
+.entry-table .side {
+  width: var(--side-col);
+  font-weight: 700;
+  white-space: nowrap;
+  text-align: right;
+}
+
+.edu-table .main,
+.edu-table .meta {
+  text-align: center;
+}
+
+.project-table .meta {
+  text-align: left;
+}
+
+.entry-table .meta {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.meta-row td {
+  padding-top: 1px;
+}
+
+p {
+  margin: 0 0 4px;
+}
+
+ul {
+  margin: 4px 0 10px 26px;
+  padding: 0;
+}
+
+li {
+  margin: 2px 0;
+  text-align: justify;
+}
+
+strong {
+  font-weight: 700;
+}
+
+em {
+  font-style: normal;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+@media print {
+  body {
+    max-width: none;
+    padding: 8mm 12mm 10mm;
+    font-size: 11pt;
+    line-height: 1.42;
+  }
+
+  .resume-header tr:first-child td {
+    font-size: 16pt;
+  }
+
+  .resume-header .value {
+    font-size: 11pt;
+  }
+
+  h2 {
+    font-size: 13pt;
+  }
+
+  .entry-table .meta {
+    font-size: 10pt;
+  }
+
+  li,
+  h2,
+  table {
+    page-break-inside: avoid;
+  }
+}

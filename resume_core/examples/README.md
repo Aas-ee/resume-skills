@@ -18,6 +18,30 @@ Read these first:
 - `templates/typora-classic.v1.json`
 - `templates/markdown-basic.v1.json`
 
+## Template asset directories
+
+Each built-in template now points to concrete assets in `template-assets/`:
+
+- `template.md` — markdown-first editable template
+- `template.html` — HTML rendering template
+- `style.css` — reusable style asset for the Typora-first template package and later host reuse
+
+For `typora-classic`, the markdown asset is the primary authoring surface and closely follows a Typora-style table-based printable resume layout.
+
+## Built-in template gallery
+
+Each built-in template manifest includes a `previewCard` block that hosts can surface as a template-selection card before intake starts.
+
+Hosts can list those cards through the public catalog CLI:
+
+```bash
+python3 resume_runtime/template_catalog_cli.py \
+  --examples-root resume_core/examples \
+  --generated-at 2026-04-16T12:00:00Z
+```
+
+The CLI response includes one `card` per template, derived directly from each manifest's `previewCard`, alongside the matching `template_context` payload for downstream intake.
+
 ## Raw material to extracted facts
 
 This chain shows how one synthetic source document becomes extracted facts and then a reusable profile:
@@ -32,7 +56,7 @@ This chain shows how one synthetic source document becomes extracted facts and t
 
 ## Typora Classic reading path
 
-The Typora path shows both import-existing and guided-intake entry points, then one guided round and one follow-up round:
+The Typora-first package is the primary end-to-end example. It shows both import-existing and guided-intake entry points, then one guided round and one follow-up round:
 
 - `intake-sessions/typora-import-existing.v1.json`
 - `intake-sessions/typora-guided-empty.v1.json`

@@ -8,6 +8,7 @@ from resume.runtime.prompt_renderer import (
     render_drafting_prompt,
     render_material_parse_failure_prompt,
     render_structured_prompt,
+    render_template_selection_prompt,
 )
 
 

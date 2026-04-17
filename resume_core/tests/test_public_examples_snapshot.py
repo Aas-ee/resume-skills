@@ -67,6 +67,9 @@ class PublicExamplesSnapshotTests(unittest.TestCase):
         self.assert_relative_paths_exist(
             [
                 "examples/templates/typora-classic.v1.json",
+                "examples/template-assets/typora-classic/template.md",
+                "examples/template-assets/typora-classic/template.html",
+                "examples/template-assets/typora-classic/style.css",
                 "examples/intake-sessions/typora-import-existing.v1.json",
                 "examples/intake-sessions/typora-guided-empty.v1.json",
                 "examples/guided-intake-checklists/typora-classic.v1.json",
@@ -95,32 +98,60 @@ class PublicExamplesSnapshotTests(unittest.TestCase):
             "examples/follow-up-profile-projections/typora-classic.partial.v1.json"
         )
 
-        self.assertEqual(guided_response["responses"]["basic.email"], "alex@example.com")
+        self.assertEqual(guided_response["responses"]["required.role"], "Software Engineer")
         self.assertEqual(
             guided_response["responses"]["summary.items"],
             [
-                "Backend engineer focused on developer tools and structured content pipelines.",
-                "Maintains synthetic public fixtures that explain the resume workflow end to end.",
+                "Builds reusable workflow tooling.",
+                "Turns structured intake into production-ready artifacts.",
             ],
         )
         self.assertEqual(
-            guided_projection["profile"]["fieldValues"]["basic.email"],
-            "alex@example.com",
+            guided_projection["profile"]["fieldValues"]["required.role"],
+            "Software Engineer",
         )
-        self.assertEqual(follow_up_response["responses"]["basic.name"], "Alex Example")
         self.assertEqual(
-            follow_up_projection["profile"]["fieldValues"]["basic.name"],
+            guided_projection["profile"]["fieldValues"]["summary.items"],
+            [
+                "Builds reusable workflow tooling.",
+                "Turns structured intake into production-ready artifacts.",
+            ],
+        )
+        self.assertEqual(follow_up_response["responses"]["basic.nameEn"], "Alex Example")
+        self.assertEqual(
+            follow_up_response["responses"]["skills.items"],
+            [
+                "Engineering: Python / TypeScript / CLI tooling",
+                "Platforms: Resume workflows / template packaging / render pipelines",
+            ],
+        )
+        self.assertEqual(
+            follow_up_response["responses"]["project[].date"],
+            "2025.01 - Present",
+        )
+        self.assertEqual(
+            follow_up_projection["profile"]["fieldValues"]["basic.nameEn"],
             "Alex Example",
         )
         self.assertEqual(
-            follow_up_projection["profile"]["fieldValues"]["project[].techStack"],
-            "Java, Spring Boot, MySQL, Redis",
+            follow_up_projection["profile"]["fieldValues"]["skills.items"],
+            [
+                "Engineering: Python / TypeScript / CLI tooling",
+                "Platforms: Resume workflows / template packaging / render pipelines",
+            ],
+        )
+        self.assertEqual(
+            follow_up_projection["profile"]["fieldValues"]["project[].date"],
+            "2025.01 - Present",
         )
 
     def test_markdown_baseline_fixture_chain_exists(self):
         self.assert_relative_paths_exist(
             [
                 "examples/templates/markdown-basic.v1.json",
+                "examples/template-assets/markdown-basic/template.md",
+                "examples/template-assets/markdown-basic/template.html",
+                "examples/template-assets/markdown-basic/style.css",
                 "examples/intake-sessions/markdown-manual-override.v1.json",
                 "examples/guided-intake-checklists/markdown-basic.v1.json",
                 "examples/guided-intake-question-sets/markdown-basic.v1.json",

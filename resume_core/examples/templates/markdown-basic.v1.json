@@ -78,5 +78,17 @@
     }
   ],
   "renderSpecRef": "renderers/markdown-basic@1.0.0",
-  "origin": "user-promoted"
+  "origin": "user-promoted",
+  "assetRefs": {
+    "markdown": "../template-assets/markdown-basic/template.md",
+    "html": "../template-assets/markdown-basic/template.html",
+    "css": "../template-assets/markdown-basic/style.css"
+  },
+  "previewCard": {
+    "title": "Markdown Basic Resume",
+    "styleLabel": "Plain markdown with light styling",
+    "useCases": ["通用简历", "跨编辑器复用", "轻量主题"],
+    "requiredContentSummary": ["姓名和邮箱", "教育经历", "项目标题和项目描述"]
+  },
+  "storageScope": "builtin"
 }

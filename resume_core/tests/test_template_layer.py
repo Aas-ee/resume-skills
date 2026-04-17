@@ -25,12 +25,6 @@ def validator_for(def_name: str):
 
 
 class ResumeCoreTemplateLayerTests(unittest.TestCase):
-    ORIGIN_TO_SOURCE = {
-        "builtin": "builtin",
-        "user-promoted": "user",
-        "imported": "imported",
-    }
-
     @classmethod
     def setUpClass(cls):
         cls.catalog = load_json(EXAMPLES / "shared-field-catalog.v1.json")
@@ -53,6 +47,13 @@ class ResumeCoreTemplateLayerTests(unittest.TestCase):
     def test_template_registry_example_is_valid(self):
         self.registry_validator.validate(self.registry)
 
+    def test_template_manifest_examples_include_asset_refs_preview_card_and_storage_scope(self):
+        for manifest in self.manifests:
+            with self.subTest(templateId=manifest["templateId"]):
+                self.assertIn("assetRefs", manifest)
+                self.assertIn("previewCard", manifest)
+                self.assertIn("storageScope", manifest)
+
     def test_registry_declares_default_template_id(self):
         entry_template_ids = {entry["templateId"] for entry in self.registry["entries"]}
         self.assertIn("defaultTemplateId", self.registry)
@@ -69,12 +70,29 @@ class ResumeCoreTemplateLayerTests(unittest.TestCase):
         registry_index = {(entry["templateId"], entry["version"]) for entry in self.registry["entries"]}
         self.assertEqual(registry_index, manifest_index)
 
-    def test_registry_source_matches_manifest_origin_mapping(self):
-        registry_sources = {
-            (entry["templateId"], entry["version"]): entry["source"] for entry in self.registry["entries"]
+    def test_public_examples_keep_manifest_origin_and_registry_source_distinct(self):
+        expected_template_state = {
+            "typora-classic": {"manifest_origin": "builtin", "registry_source": "builtin"},
+            "markdown-basic": {
+                "manifest_origin": "user-promoted",
+                "registry_source": "builtin",
+            },
         }
-        for manifest in self.manifests:
-            manifest_key = (manifest["templateId"], manifest["version"])
-            with self.subTest(templateId=manifest["templateId"], version=manifest["version"]):
-                self.assertIn(manifest["origin"], self.ORIGIN_TO_SOURCE)
-                self.assertEqual(registry_sources[manifest_key], self.ORIGIN_TO_SOURCE[manifest["origin"]])
+        manifests_by_id = {manifest["templateId"]: manifest for manifest in self.manifests}
+        registry_entries_by_id = {
+            entry["templateId"]: entry for entry in self.registry["entries"]
+        }
+
+        self.assertEqual(set(manifests_by_id), set(expected_template_state))
+        self.assertEqual(set(registry_entries_by_id), set(expected_template_state))
+
+        for template_id, expected_state in expected_template_state.items():
+            with self.subTest(templateId=template_id):
+                self.assertEqual(
+                    manifests_by_id[template_id]["origin"], expected_state["manifest_origin"]
+                )
+                self.assertEqual(
+                    registry_entries_by_id[template_id]["source"], expected_state["registry_source"]
+                )
+                self.assertEqual(registry_entries_by_id[template_id]["visibility"], "official")
+                self.assertEqual(registry_entries_by_id[template_id]["status"], "active")

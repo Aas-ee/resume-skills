@@ -9,7 +9,10 @@ if str(SKILLS_ROOT) not in sys.path:
 
 from resume_runtime.runtime.agent_intake_core import AgentIntakeCoreOutcome
 from resume.runtime.agent_intake_entrypoint import AgentIntakeEntrypoint
-from resume.runtime.agent_prompt_adapter import render_agent_outcome_prompt
+from resume.runtime.agent_prompt_adapter import (
+    render_agent_outcome_prompt,
+    render_template_selection_prompt,
+)
 from resume.runtime.follow_up_agent_adapter import AskedQuestion
 from resume.runtime.host_conversation_adapter import HostConversationOutcome
 from resume.runtime.material_intake_adapter import MaterialIntakeResult
@@ -27,6 +30,44 @@ class _StoreStub:
 
 
 class AgentPromptAdapterTests(unittest.TestCase):
+    def test_render_template_selection_prompt_lists_numbered_cards_and_hint(self):
+        cards = [
+            {
+                "title": "Typora Classic Resume",
+                "template_id": "typora-classic",
+                "style_label": "Print-oriented classic layout",
+                "use_cases": ["社招后端", "Typora 预览"],
+                "required_content_summary": ["姓名和邮箱", "至少一个项目"],
+                "storage_scope": "builtin",
+            },
+            {
+                "title": "Markdown Basic Resume",
+                "template_id": "markdown-basic",
+                "style_label": "Plain markdown with light styling",
+                "use_cases": ["通用简历"],
+                "required_content_summary": ["姓名和邮箱", "教育经历"],
+                "storage_scope": "builtin",
+            },
+        ]
+
+        prompt = render_template_selection_prompt(cards)
+
+        self.assertEqual(
+            prompt,
+            "先选一个模板：\n"
+            "1. Typora Classic Resume [typora-classic]\n"
+            "   风格：Print-oriented classic layout\n"
+            "   适用：社招后端 / Typora 预览\n"
+            "   需要：姓名和邮箱；至少一个项目\n"
+            "   来源：builtin\n"
+            "2. Markdown Basic Resume [markdown-basic]\n"
+            "   风格：Plain markdown with light styling\n"
+            "   适用：通用简历\n"
+            "   需要：姓名和邮箱；教育经历\n"
+            "   来源：builtin\n"
+            "你也可以说‘上传我的模板’，或者说‘基于 1 改一个更紧凑的版本’。"
+        )
+
     def test_ask_existing_material_outcome_uses_renderer_prompt(self):
         outcome = AgentIntakeCoreOutcome(
             mode="freeform_discovery",

@@ -3,42 +3,66 @@
   "templateId": "typora-classic",
   "profileId": "profile-from-guided-intake-response-set-typora-classic",
   "missingRequired": [
-    "basic.name",
-    "education[].school",
-    "education[].major",
-    "education[].degree",
+    "project[].date",
     "project[].name",
     "project[].role",
-    "project[].techStack"
+    "education[].school",
+    "education[].degree",
+    "education[].major"
   ],
   "missingRecommended": [
-    "links.github"
+    "basic.nameEn",
+    "basic.phone",
+    "links.github",
+    "skills.items",
+    "work[].date",
+    "work[].company",
+    "work[].role",
+    "work[].bullets",
+    "project[].techStack",
+    "education[].date"
   ],
   "conflicts": [],
   "questions": [
     {
-      "fieldId": "basic.name",
-      "question": "Please provide Candidate name shown in the header."
+      "fieldId": "basic.nameEn",
+      "question": "Please provide Optional second-language name shown beside the main name."
+    },
+    {
+      "fieldId": "basic.phone",
+      "question": "Please provide Phone number shown in the contact rows."
     },
     {
       "fieldId": "links.github",
-      "question": "Please provide GitHub link if it strengthens the profile."
+      "question": "Please provide GitHub or portfolio link if it strengthens the resume."
     },
     {
-      "fieldId": "education[].school",
-      "question": "Please provide School name for each education entry."
+      "fieldId": "skills.items",
+      "question": "Please provide Repeatable skill lines that stay profession-neutral."
     },
     {
-      "fieldId": "education[].major",
-      "question": "Please provide Major for each education entry."
+      "fieldId": "work[].date",
+      "question": "Please provide Date range for each work experience row."
     },
     {
-      "fieldId": "education[].degree",
-      "question": "Please provide Degree label for each education entry."
+      "fieldId": "work[].company",
+      "question": "Please provide Company or organization name for each work row."
+    },
+    {
+      "fieldId": "work[].role",
+      "question": "Please provide Role title for each work row."
+    },
+    {
+      "fieldId": "work[].bullets",
+      "question": "Please provide Bullets describing responsibilities or impact for each work entry."
+    },
+    {
+      "fieldId": "project[].date",
+      "question": "Please provide Date range shown in the project table."
     },
     {
       "fieldId": "project[].name",
-      "question": "Please provide Project title."
+      "question": "Please provide Project or initiative name."
     },
     {
       "fieldId": "project[].role",
@@ -46,7 +70,23 @@
     },
     {
       "fieldId": "project[].techStack",
-      "question": "Please provide Short technology list for the project heading."
+      "question": "Please provide Short stack or descriptor line shown in the meta row."
+    },
+    {
+      "fieldId": "education[].date",
+      "question": "Please provide Date range for each education entry."
+    },
+    {
+      "fieldId": "education[].school",
+      "question": "Please provide School name for each education entry."
+    },
+    {
+      "fieldId": "education[].degree",
+      "question": "Please provide Degree label for each education entry."
+    },
+    {
+      "fieldId": "education[].major",
+      "question": "Please provide Major for each education entry."
     }
   ],
   "generatedAt": "2026-04-11T10:10:00Z"

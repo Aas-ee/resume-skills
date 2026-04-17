@@ -9,6 +9,8 @@ class ResumeCoreWorkspaceSmokeTests(unittest.TestCase):
         required_directories = [
             ROOT / "schema",
             ROOT / "examples" / "templates",
+            ROOT / "examples" / "template-assets" / "typora-classic",
+            ROOT / "examples" / "template-assets" / "markdown-basic",
             ROOT / "examples" / "source-documents",
             ROOT / "examples" / "source-extractions",
             ROOT / "examples" / "resume-profiles",
