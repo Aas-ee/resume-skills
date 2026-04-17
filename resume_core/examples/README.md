@@ -24,7 +24,9 @@ Each built-in template now points to concrete assets in `template-assets/`:
 
 - `template.md` — markdown-first editable template
 - `template.html` — HTML rendering template
-- `style.css` — reusable style asset for Typora-first preview and later reuse
+- `style.css` — reusable style asset for the Typora-first template package and later host reuse
+
+For `typora-classic`, the markdown asset is the primary authoring surface and closely follows a Typora-style table-based printable resume layout.
 
 ## Built-in template gallery
 
@@ -54,7 +56,7 @@ This chain shows how one synthetic source document becomes extracted facts and t
 
 ## Typora Classic reading path
 
-The Typora path shows both import-existing and guided-intake entry points, then one guided round and one follow-up round:
+The Typora-first package is the primary end-to-end example. It shows both import-existing and guided-intake entry points, then one guided round and one follow-up round:
 
 - `intake-sessions/typora-import-existing.v1.json`
 - `intake-sessions/typora-guided-empty.v1.json`

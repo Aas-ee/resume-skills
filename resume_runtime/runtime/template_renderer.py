@@ -72,14 +72,23 @@ def build_template_context(profile: dict[str, Any]) -> dict[str, Any]:
     field_values = profile["fieldValues"]
     return {
         "basic.name": field_values.get("basic.name", ""),
+        "basic.nameEn": field_values.get("basic.nameEn", ""),
+        "basic.phone": field_values.get("basic.phone", ""),
         "basic.email": field_values.get("basic.email", ""),
+        "required.role": field_values.get("required.role", ""),
         "links.github": field_values.get("links.github", ""),
         "summary.items": _coerce_list(field_values.get("summary.items", [])),
-        "education": _zip_rows(field_values, "education", ("school", "major", "degree")),
+        "skills.items": _coerce_list(field_values.get("skills.items", [])),
+        "work": _zip_rows(field_values, "work", ("date", "company", "role", "bullets")),
+        "education": _zip_rows(
+            field_values,
+            "education",
+            ("date", "school", "degree", "major"),
+        ),
         "project": _zip_rows(
             field_values,
             "project",
-            ("name", "role", "techStack", "bullets"),
+            ("date", "name", "role", "techStack", "bullets"),
         ),
     }
 

@@ -5,9 +5,28 @@
   "templateId": "typora-classic",
   "profileId": "profile-from-guided-intake-response-set-typora-classic",
   "responses": {
-    "basic.name": "Alex Example",
-    "education[].major": "Software Engineering",
-    "project[].techStack": "Java, Spring Boot, MySQL, Redis"
+    "basic.nameEn": "Alex Example",
+    "basic.phone": "+1 555-0100",
+    "links.github": "https://github.com/alex-example",
+    "skills.items": [
+      "Engineering: Python / TypeScript / CLI tooling",
+      "Platforms: Resume workflows / template packaging / render pipelines"
+    ],
+    "work[].date": "2024.01 - Present",
+    "work[].company": "Example Labs",
+    "work[].role": "Software Engineer",
+    "work[].bullets": [
+      "Built shared runtime flows for multiple hosts.",
+      "Improved validation coverage for synthetic public fixtures."
+    ],
+    "project[].date": "2025.01 - Present",
+    "project[].name": "Example Stream",
+    "project[].role": "Open Source Maintainer",
+    "project[].techStack": ["TypeScript", "Node.js", "Express", "CLI", "Automation"],
+    "education[].date": "2018.09 - 2022.06",
+    "education[].school": "Example University",
+    "education[].degree": "BSc",
+    "education[].major": "Computer Science"
   },
   "updatedAt": "2026-04-12T10:00:00Z"
 }

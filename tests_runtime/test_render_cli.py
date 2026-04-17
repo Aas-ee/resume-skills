@@ -21,31 +21,21 @@ def load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-class TemplateRendererTests(unittest.TestCase):
-    def test_render_template_bundle_renders_builtin_assets_without_placeholders(self):
-        entry = load_template_catalog(
+def load_typora_entry():
+    return next(
+        entry
+        for entry in load_template_catalog(
             examples_root=EXAMPLES,
             generated_at="2026-04-16T12:00:00Z",
-        )[0]
-        profile = load_json(PROFILE_PATH)
-        profile["fieldValues"].update(
-            {
-                "basic.email": "alex@example.com",
-                "summary.items": [
-                    "Builds agent workflows",
-                    "Ships developer tooling",
-                ],
-                "education[].school": ["Example University"],
-                "education[].degree": ["BSc"],
-                "education[].major": ["Computer Science"],
-                "project[].bullets": [
-                    [
-                        "Improved runtime reliability",
-                        "Published reusable package",
-                    ]
-                ],
-            }
         )
+        if entry.templateId == "typora-classic"
+    )
+
+
+class TemplateRendererTests(unittest.TestCase):
+    def test_render_template_bundle_renders_builtin_assets_without_placeholders(self):
+        entry = load_typora_entry()
+        profile = load_json(PROFILE_PATH)
 
         bundle = render_template_bundle(
             manifest=entry.manifest,
@@ -57,35 +47,107 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertNotIn("}}", bundle["markdown"])
         self.assertNotIn("{{", bundle["html"])
         self.assertNotIn("}}", bundle["html"])
-        self.assertIn("- Builds agent workflows", bundle["markdown"])
-        self.assertIn("<li>Builds agent workflows</li>", bundle["html"])
-        self.assertIn("### Example University", bundle["markdown"])
-        self.assertIn("BSc · Computer Science", bundle["markdown"])
-        self.assertIn("<li>Published reusable package</li>", bundle["html"])
+        self.assertIn('<div class="resume-page">', bundle["markdown"])
+        self.assertIn('<table class="resume-header">', bundle["markdown"])
+        self.assertIn("Software Engineer", bundle["markdown"])
+        self.assertIn("Engineering: Python / TypeScript / CLI tooling", bundle["markdown"])
+        self.assertIn('<table class="entry-table work-table">', bundle["markdown"])
+        self.assertIn("Example Labs", bundle["markdown"])
+        self.assertIn('<table class="entry-table project-table">', bundle["markdown"])
+        self.assertIn("Example Stream", bundle["markdown"])
+        self.assertIn("TypeScript, Node.js, Express, CLI, Automation", bundle["markdown"])
+        self.assertIn('<table class="resume-header">', bundle["html"])
+        self.assertIn('<table class="entry-table project-table">', bundle["html"])
         self.assertIn("font-family", bundle["css"])
 
-    def test_build_template_context_omits_empty_optional_sections(self):
+    def test_build_template_context_groups_expanded_profile_fields(self):
         profile = load_json(PROFILE_PATH)
 
         context = build_template_context(profile)
 
-        self.assertEqual(context["basic.email"], "")
-        self.assertEqual(context["summary.items"], [])
-        self.assertEqual(context["education"], [])
+        self.assertEqual(context["basic.name"], "Alex Example")
+        self.assertEqual(context["basic.nameEn"], "Alex Example")
+        self.assertEqual(context["basic.phone"], "+1 555-0100")
+        self.assertEqual(context["basic.email"], "alex@example.com")
+        self.assertEqual(context["required.role"], "Software Engineer")
+        self.assertEqual(
+            context["skills.items"],
+            [
+                "Engineering: Python / TypeScript / CLI tooling",
+                "Platforms: Resume workflows / template packaging / render pipelines",
+            ],
+        )
+        self.assertEqual(len(context["work"]), 1)
+        self.assertEqual(context["work"][0]["date"], "2024.01 - Present")
+        self.assertEqual(context["work"][0]["company"], "Example Labs")
+        self.assertEqual(context["work"][0]["role"], "Software Engineer")
+        self.assertEqual(
+            context["work"][0]["bullets"],
+            [
+                "Built shared runtime flows for multiple hosts.",
+                "Improved validation coverage for synthetic public fixtures.",
+            ],
+        )
+        self.assertEqual(len(context["education"]), 1)
+        self.assertEqual(context["education"][0]["date"], "2018.09 - 2022.06")
+        self.assertEqual(context["education"][0]["school"], "Example University")
         self.assertEqual(len(context["project"]), 1)
+        self.assertEqual(context["project"][0]["date"], "2025.01 - Present")
         self.assertEqual(context["project"][0]["name"], "Example Stream")
         self.assertEqual(context["project"][0]["role"], "Open Source Maintainer")
         self.assertEqual(
             context["project"][0]["techStack"],
             ["TypeScript", "Node.js", "Express", "CLI", "Automation"],
         )
-        self.assertNotIn("bullets", context["project"][0])
+
+    def test_build_template_context_omits_empty_optional_sections(self):
+        profile = {
+            "profileId": "minimal-profile",
+            "fieldValues": {
+                "basic.name": "Alex Example",
+                "basic.nameEn": "Alex Example",
+                "basic.phone": "+1 555-0100",
+                "required.role": "Software Engineer",
+                "links.github": "https://github.com/alex-example",
+            },
+        }
+
+        context = build_template_context(profile)
+
+        self.assertEqual(context["basic.email"], "")
+        self.assertEqual(context["summary.items"], [])
+        self.assertEqual(context["skills.items"], [])
+        self.assertEqual(context["work"], [])
+        self.assertEqual(context["education"], [])
+        self.assertEqual(context["project"], [])
+
+    def test_typora_classic_manifest_and_assets_match_profession_neutral_table_layout(self):
+        entry = load_typora_entry()
+
+        self.assertEqual(entry.templateId, "typora-classic")
+        self.assertEqual(entry.manifest["target"], "typora")
+        self.assertEqual(
+            entry.manifest["sectionOrder"],
+            ["header", "summary", "skills", "work", "projects", "education"],
+        )
+
+        markdown_template = entry.manifestPath.parent.joinpath(entry.manifest["assetRefs"]["markdown"]).resolve().read_text(encoding="utf-8")
+        html_template = entry.manifestPath.parent.joinpath(entry.manifest["assetRefs"]["html"]).resolve().read_text(encoding="utf-8")
+        css_text = entry.manifestPath.parent.joinpath(entry.manifest["assetRefs"]["css"]).resolve().read_text(encoding="utf-8")
+
+        self.assertIn('<table class="resume-header">', markdown_template)
+        self.assertIn('{{basic.nameEn}}', markdown_template)
+        self.assertIn('{{required.role}}', markdown_template)
+        self.assertIn('{{#skills.items}}', markdown_template)
+        self.assertIn('{{#work}}', markdown_template)
+        self.assertIn('{{date}}', markdown_template)
+        self.assertIn('{{#project}}', markdown_template)
+        self.assertIn('class="entry-table project-table"', html_template)
+        self.assertIn('--accent', css_text)
+        self.assertIn('.entry-table .date', css_text)
 
     def test_render_template_bundle_raises_for_inconsistent_repeatable_field_lengths(self):
-        entry = load_template_catalog(
-            examples_root=EXAMPLES,
-            generated_at="2026-04-16T12:00:00Z",
-        )[0]
+        entry = load_typora_entry()
         profile = load_json(PROFILE_PATH)
         profile["fieldValues"].update(
             {
@@ -107,12 +169,8 @@ class TemplateRendererTests(unittest.TestCase):
             )
 
     def test_render_cli_writes_markdown_html_and_css_files(self):
-        entry = load_template_catalog(
-            examples_root=EXAMPLES,
-            generated_at="2026-04-16T12:00:00Z",
-        )[0]
+        entry = load_typora_entry()
         profile = load_json(PROFILE_PATH)
-        profile["fieldValues"]["basic.email"] = "alex@example.com"
         request = {
             "version": "resume-render-cli/v1",
             "manifest_path": str(entry.manifestPath),

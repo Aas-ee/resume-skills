@@ -1,32 +1,89 @@
 <div class="resume-page">
-  <header class="resume-header">
-    <h1>{{basic.name}}</h1>
-    <p>Email: {{basic.email}}</p>
-    {{#links.github}}<p>GitHub: {{links.github}}</p>{{/links.github}}
-  </header>
+  <table class="resume-header">
+    <tr>
+      <td class="label name">{{basic.name}}</td>
+      <td class="value name">{{basic.nameEn}}</td>
+    </tr>
+    {{#basic.phone}}
+    <tr>
+      <td class="label">Phone</td>
+      <td class="value">{{basic.phone}}</td>
+    </tr>
+    {{/basic.phone}}
+    <tr>
+      <td class="label">Email</td>
+      <td class="value">{{basic.email}}</td>
+    </tr>
+    {{#links.github}}
+    <tr>
+      <td class="label">Link</td>
+      <td class="value"><a href="{{links.github}}">{{links.github}}</a></td>
+    </tr>
+    {{/links.github}}
+    <tr>
+      <td class="label">Target Role</td>
+      <td class="value emphasis">{{required.role}}</td>
+    </tr>
+  </table>
+
   <section>
     <h2>Summary</h2>
-    <ul>
-      {{#summary.items}}<li>{{.}}</li>{{/summary.items}}
-    </ul>
+    <ul>{{#summary.items}}<li>{{.}}</li>{{/summary.items}}</ul>
   </section>
+
+  <section>
+    <h2>Skills</h2>
+    <ul>{{#skills.items}}<li>{{.}}</li>{{/skills.items}}</ul>
+  </section>
+
+  {{#work}}
+  <section>
+    <h2>Work Experience</h2>
+    <table class="entry-table work-table">
+      <tr>
+        <td class="date">{{date}}</td>
+        <td class="main">{{company}}</td>
+        <td class="side">{{role}}</td>
+      </tr>
+    </table>
+    <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
+  </section>
+  {{/work}}
+
+  <section>
+    <h2>Featured Projects</h2>
+    {{#project}}
+    <table class="entry-table project-table">
+      <tr>
+        <td class="date">{{date}}</td>
+        <td class="main">{{name}}</td>
+        <td class="side">{{role}}</td>
+      </tr>
+      {{#techStack}}
+      <tr class="meta-row">
+        <td class="meta" colspan="3">Tech Stack: {{techStack}}</td>
+      </tr>
+      {{/techStack}}
+    </table>
+    <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
+    {{/project}}
+  </section>
+
   <section>
     <h2>Education</h2>
     {{#education}}
-    <article class="education-item">
-      <h3>{{school}}</h3>
-      <p>{{degree}} · {{major}}</p>
-    </article>
+    <table class="entry-table edu-table">
+      <tr>
+        <td class="date">{{date}}</td>
+        <td class="main">{{school}}</td>
+        <td class="side">{{degree}}</td>
+      </tr>
+      <tr class="meta-row">
+        <td class="date"></td>
+        <td class="meta">{{major}}</td>
+        <td class="side"></td>
+      </tr>
+    </table>
     {{/education}}
-  </section>
-  <section>
-    <h2>Projects</h2>
-    {{#project}}
-    <article class="project-item">
-      <h3>{{name}} | {{role}}</h3>
-      <p>Tech Stack: {{techStack}}</p>
-      <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
-    </article>
-    {{/project}}
   </section>
 </div>
