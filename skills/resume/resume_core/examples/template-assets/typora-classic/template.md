@@ -59,12 +59,10 @@
     <td class="date">{{date}}</td>
     <td class="main">{{name}}</td>
     <td class="side">{{role}}</td>
-  </tr>
-  {{#techStack}}
+  </tr>{{#techStack}}
   <tr class="meta-row">
     <td class="meta" colspan="3">技术栈：{{techStack}}</td>
-  </tr>
-  {{/techStack}}
+  </tr>{{/techStack}}
 </table>
 
 {{#bullets}}

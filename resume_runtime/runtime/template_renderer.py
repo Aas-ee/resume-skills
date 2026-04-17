@@ -7,6 +7,23 @@ from typing import Any
 
 _SECTION_RE = re.compile(r"{{#([^}]+)}}(.*?){{/\1}}", re.DOTALL)
 _FIELD_RE = re.compile(r"{{([^#/][^}]*)}}")
+_HTML_TAG_RE = re.compile(r"<html\b", re.IGNORECASE)
+
+_HTML_DOCUMENT_TEMPLATE = """<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{title}</title>
+  <style>
+{css}
+  </style>
+</head>
+<body>
+{body}
+</body>
+</html>
+"""
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -134,6 +151,21 @@ def render_template_text(template_text: str, context: dict[str, Any]) -> str:
     )
 
 
+def _build_standalone_html(
+    html_fragment: str,
+    css_text: str,
+    *,
+    title: str,
+) -> str:
+    if _HTML_TAG_RE.search(html_fragment):
+        return html_fragment
+    return _HTML_DOCUMENT_TEMPLATE.format(
+        title=title,
+        css=css_text,
+        body=html_fragment,
+    )
+
+
 def render_template_bundle(
     *,
     manifest: dict[str, Any],
@@ -153,9 +185,14 @@ def render_template_bundle(
         manifest_path,
         manifest["assetRefs"]["css"],
     ).read_text(encoding="utf-8")
+    rendered_html = render_template_text(html_template, context)
     return {
         "markdown": render_template_text(markdown_template, context),
-        "html": render_template_text(html_template, context),
+        "html": _build_standalone_html(
+            rendered_html,
+            css_text,
+            title=_stringify(context.get("basic.name")) or manifest.get("name", "Resume"),
+        ),
         "css": css_text,
     }
 

@@ -63,6 +63,9 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertIn("TypeScript, Node.js, Express, CLI, Automation", bundle["markdown"])
         self.assertIn('<table class="resume-header">', bundle["html"])
         self.assertIn('<table class="entry-table project-table">', bundle["html"])
+        self.assertIn("<!DOCTYPE html>", bundle["html"])
+        self.assertIn("<style>", bundle["html"])
+        self.assertIn(bundle["css"].strip().splitlines()[0], bundle["html"])
         self.assertIn("个人总结", bundle["html"])
         self.assertIn("教育经历", bundle["html"])
         self.assertIn("font-family", bundle["css"])
@@ -85,6 +88,25 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertIsNotNone(header_table_match)
         header_table = header_table_match.group(1)
         self.assertNotRegex(header_table, r"</tr>\s*\n\s*\n\s*<tr")
+
+    def test_typora_markdown_does_not_insert_blank_lines_inside_project_table(self):
+        entry = load_typora_entry()
+        profile = load_json(PROFILE_PATH)
+
+        bundle = render_template_bundle(
+            manifest=entry.manifest,
+            manifest_path=entry.manifestPath,
+            profile=profile,
+        )
+
+        project_table_match = re.search(
+            r'<table class="entry-table project-table">(.*?)</table>',
+            bundle["markdown"],
+            re.DOTALL,
+        )
+        self.assertIsNotNone(project_table_match)
+        project_table = project_table_match.group(1)
+        self.assertNotRegex(project_table, r"</tr>\s*\n\s*\n\s*<tr")
 
     def test_build_template_context_groups_expanded_profile_fields(self):
         profile = load_json(PROFILE_PATH)
@@ -224,3 +246,5 @@ class TemplateRendererTests(unittest.TestCase):
             self.assertTrue((Path(temp_dir) / "resume.md").is_file())
             self.assertTrue((Path(temp_dir) / "resume.html").is_file())
             self.assertTrue((Path(temp_dir) / "style.css").is_file())
+            html_text = (Path(temp_dir) / "resume.html").read_text(encoding="utf-8")
+            self.assertIn("<style>", html_text)
