@@ -162,10 +162,6 @@ class ResumeRuntimeImportTests(unittest.TestCase):
             [
                 sys.executable,
                 str(LEGACY_TEMPLATE_CATALOG_CLI),
-                "--examples-root",
-                str(EXAMPLES_ROOT),
-                "--generated-at",
-                "2026-04-16T12:00:00Z",
             ],
             cwd=ROOT,
             text=True,
@@ -181,6 +177,12 @@ class ResumeRuntimeImportTests(unittest.TestCase):
         self.assertTrue(payload["ok"])
         self.assertEqual(payload["version"], "resume-template-catalog-cli/v1")
         self.assertGreater(len(payload["entries"]), 0)
+        self.assertIn("asset_paths", payload["entries"][0])
+        self.assertTrue(
+            payload["entries"][0]["asset_paths"]["css"].endswith(
+                "template-assets/typora-classic/style.css"
+            )
+        )
 
     def test_legacy_template_store_cli_wrapper_runs_directly(self):
         request = {

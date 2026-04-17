@@ -29,10 +29,22 @@ class SharedSkillDiscoveryTests(unittest.TestCase):
         self.assertIn("not the primary shared contract", shared_text)
         self.assertNotIn("`.claude/skills/resume/SKILL.md`", shared_text)
 
+    def test_shared_skill_points_to_builtin_template_manifests_and_assets(self):
+        shared_text = SHARED_SKILL.read_text(encoding="utf-8")
+        self.assertIn("resume_core/examples/templates/", shared_text)
+        self.assertIn("resume_core/examples/template-assets/", shared_text)
+        self.assertIn("typora-classic", shared_text)
+        self.assertIn("markdown-basic", shared_text)
+        self.assertIn("resume_core/examples/template-assets/typora-classic/style.css", shared_text)
+        self.assertIn("resume_core/examples/template-assets/markdown-basic/style.css", shared_text)
+
     def test_claude_skill_points_back_to_shared_skill(self):
         claude_text = CLAUDE_SKILL.read_text(encoding="utf-8")
         self.assertIn("skills/resume/SKILL.md", claude_text)
         self.assertIn("adapter layer", claude_text)
+        self.assertIn(".claude/skills/resume/template_catalog_cli.py", claude_text)
+        self.assertIn("entries[].asset_paths", claude_text)
+        self.assertIn("entries[].template_context", claude_text)
 
 
 if __name__ == "__main__":

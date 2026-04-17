@@ -33,10 +33,36 @@ Claude-specific wrappers under `.claude/skills/resume/` are compatibility adapte
 
 Before parsing materials or asking for missing information, choose a template.
 
+- In this repository, built-in template manifests live under `resume_core/examples/templates/`
+- Built-in template assets, including CSS, live under `resume_core/examples/template-assets/`
+- The current built-in templates are `typora-classic` and `markdown-basic`
 - load built-in and stored templates through `resume_runtime/template_catalog_cli.py`
+- read `asset_paths` from the catalog CLI response when you need the concrete markdown/html/css file locations for a template
 - show template cards with template id, style, use cases, and required-content summary
 - let the user choose a built-in template, a stored template, upload a new template, or ask for a derivative template
 - once a template is chosen, use the returned `manifest` + derived `checklist` as the `template_context` for `resume_runtime/agent_intake_cli.py`
+
+If you are running inside this repository, enumerate built-in templates with:
+
+```bash
+python3 resume_runtime/template_catalog_cli.py
+```
+
+You can still override the defaults when needed:
+
+```bash
+python3 resume_runtime/template_catalog_cli.py \
+  --examples-root resume_core/examples \
+  --generated-at 2026-04-16T12:00:00Z
+```
+
+If you need to inspect a built-in template directly, start from:
+- `resume_core/examples/templates/typora-classic.v1.json`
+- `resume_core/examples/templates/markdown-basic.v1.json`
+- `resume_core/examples/template-assets/typora-classic/style.css`
+- `resume_core/examples/template-assets/markdown-basic/style.css`
+
+Do not assume the template files live beside `skills/resume/SKILL.md`. The skill file defines the workflow; the built-in template manifests and assets live in the repository paths above.
 
 ### 2. Choose the content path after template selection
 

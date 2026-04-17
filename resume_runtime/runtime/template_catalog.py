@@ -48,6 +48,17 @@ class TemplateCatalogEntry:
             "checklist": self.checklist,
         }
 
+    @property
+    def asset_paths(self) -> dict[str, str]:
+        asset_refs = self.manifest.get("assetRefs")
+        if not isinstance(asset_refs, dict):
+            return {}
+        return {
+            asset_kind: str((self.manifestPath.parent / asset_ref).resolve())
+            for asset_kind, asset_ref in asset_refs.items()
+            if isinstance(asset_ref, str) and asset_ref
+        }
+
 
 def load_json(path: Path) -> dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))

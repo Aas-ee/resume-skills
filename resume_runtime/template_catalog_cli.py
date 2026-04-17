@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import argparse
+from datetime import datetime, timezone
 import importlib.util
 import json
 import sys
@@ -33,11 +34,29 @@ except ModuleNotFoundError:  # pragma: no cover - direct script fallback
 CLI_VERSION = "resume-template-catalog-cli/v1"
 
 
+def _default_examples_root() -> Path:
+    return Path(__file__).resolve().parents[1] / "resume_core" / "examples"
+
+
+def _default_generated_at() -> str:
+    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description="List resume templates and derived template_context")
-    parser.add_argument("--examples-root", type=Path, required=True)
+    parser.add_argument(
+        "--examples-root",
+        type=Path,
+        default=_default_examples_root(),
+        help="Examples root containing template registry and built-in templates",
+    )
     parser.add_argument("--template-store-root", type=Path, default=None)
-    parser.add_argument("--generated-at", type=str, required=True)
+    parser.add_argument(
+        "--generated-at",
+        type=str,
+        default=_default_generated_at(),
+        help="Timestamp used when deriving template checklists",
+    )
     return parser.parse_args(argv)
 
 
@@ -54,6 +73,7 @@ def main(argv: list[str] | None = None) -> int:
         "entries": [
             {
                 "manifest_path": str(entry.manifestPath),
+                "asset_paths": entry.asset_paths,
                 "card": entry.card.to_dict(),
                 "template_context": entry.template_context,
             }
