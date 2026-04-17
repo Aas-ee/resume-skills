@@ -35,12 +35,10 @@ Each built-in template manifest includes a `previewCard` block that hosts can su
 Hosts can list those cards through the public catalog CLI:
 
 ```bash
-python3 resume_runtime/template_catalog_cli.py \
-  --examples-root resume_core/examples \
-  --generated-at 2026-04-16T12:00:00Z
+python3 resume_runtime/template_catalog_cli.py
 ```
 
-The CLI response includes one `card` per template, derived directly from each manifest's `previewCard`, alongside the matching `template_context` payload for downstream intake.
+The CLI response includes one `card` per template, derived directly from each manifest's `previewCard`, alongside the matching `template_context` payload for downstream intake and `asset_paths` for the resolved markdown/html/css files.
 
 ## Raw material to extracted facts
 

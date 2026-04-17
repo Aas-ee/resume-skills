@@ -55,6 +55,7 @@ class TemplateCatalogTests(unittest.TestCase):
         self.assertIsInstance(entries[0].card, TemplateCard)
         self.assertEqual(entries[0].card.title, "Typora Classic Resume")
         self.assertEqual(entries[0].checklist["requiredFields"][0], "basic.name")
+        self.assertTrue(entries[0].asset_paths["css"].endswith("template-assets/typora-classic/style.css"))
 
     def test_load_template_catalog_discovers_expected_stored_template_manifest_paths(self):
         with tempfile.TemporaryDirectory() as temp_dir:
@@ -167,5 +168,22 @@ class TemplateCatalogTests(unittest.TestCase):
         self.assertTrue(payload["ok"])
         self.assertEqual(payload["version"], "resume-template-catalog-cli/v1")
         self.assertEqual(payload["entries"][0]["card"]["template_id"], "typora-classic")
+        self.assertTrue(payload["entries"][0]["asset_paths"]["css"].endswith("template-assets/typora-classic/style.css"))
         self.assertIn("manifest", payload["entries"][0]["template_context"])
         self.assertIn("checklist", payload["entries"][0]["template_context"])
+
+    def test_template_catalog_cli_uses_repo_defaults(self):
+        completed = subprocess.run(
+            [
+                sys.executable,
+                str(CATALOG_CLI),
+            ],
+            text=True,
+            capture_output=True,
+        )
+
+        self.assertEqual(completed.returncode, 0, completed.stderr)
+        payload = json.loads(completed.stdout)
+        self.assertTrue(payload["ok"])
+        self.assertEqual(payload["entries"][0]["card"]["template_id"], "typora-classic")
+        self.assertIn("asset_paths", payload["entries"][0])

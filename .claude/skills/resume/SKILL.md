@@ -31,6 +31,25 @@ Keep Claude-specific behavior in this layer only:
 
 When possible, prefer the public entrypoints in `resume_runtime/` as the real shared interface. The Claude wrappers exist so Claude-side integrations keep working without redefining the runtime contract.
 
+For template discovery, `.claude/skills/resume/template_catalog_cli.py` delegates to the public catalog CLI.
+Inside this repository it can be run without extra arguments:
+
+```bash
+python3 .claude/skills/resume/template_catalog_cli.py
+```
+
+The response shape matches the public runtime contract, including:
+- `card`
+- `template_context`
+- `asset_paths` for resolved markdown/html/css file locations
+
+Recommended template discovery sequence inside Claude:
+1. Run `python3 .claude/skills/resume/template_catalog_cli.py`
+2. Read `entries[].card` to present built-in template choices
+3. Read `entries[].asset_paths` when you need the concrete CSS, HTML, or Markdown asset files
+4. After the user chooses a template, pass `entries[].template_context` into `.claude/skills/resume/agent_intake_cli.py` or the public `resume_runtime/agent_intake_cli.py`
+5. Only fall back to direct rewrite without template selection when the task is explicitly a pure rewrite request
+
 ## Claude-specific operating rules
 
 1. Follow `skills/resume/SKILL.md` for the shared workflow.
