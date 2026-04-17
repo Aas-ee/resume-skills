@@ -1,0 +1,11 @@
+{
+  "extractionId": "extract-basic-name",
+  "documentId": "source-existing-resume-md",
+  "fragmentText": "# Alex Example",
+  "sourceLocator": {
+    "kind": "line-range",
+    "value": "1-1"
+  },
+  "candidateFieldIds": ["basic.name"],
+  "confidence": 0.99
+}

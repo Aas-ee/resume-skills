@@ -1,0 +1,48 @@
+{
+  "questionSetId": "guided-intake-question-set-markdown-basic",
+  "templateId": "markdown-basic",
+  "templateVersion": "1.0.0",
+  "questions": [
+    {
+      "fieldId": "basic.name",
+      "question": "Please provide Candidate name in the Markdown title."
+    },
+    {
+      "fieldId": "basic.email",
+      "question": "Please provide Primary email below the title."
+    },
+    {
+      "fieldId": "education[].school",
+      "question": "Please provide School name."
+    },
+    {
+      "fieldId": "education[].major",
+      "question": "Please provide Major name."
+    },
+    {
+      "fieldId": "education[].degree",
+      "question": "Please provide Degree label."
+    },
+    {
+      "fieldId": "project[].name",
+      "question": "Please provide Project title."
+    },
+    {
+      "fieldId": "project[].role",
+      "question": "Please provide Project role label."
+    },
+    {
+      "fieldId": "project[].bullets",
+      "question": "Please provide Project bullets."
+    },
+    {
+      "fieldId": "links.github",
+      "question": "Please provide Optional GitHub link below the title."
+    },
+    {
+      "fieldId": "summary.items",
+      "question": "Please provide Short summary bullets."
+    }
+  ],
+  "generatedAt": "2026-04-10T11:05:00Z"
+}

@@ -1,0 +1,20 @@
+{
+  "responseSetId": "guided-intake-response-set-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "questionSetId": "guided-intake-question-set-typora-classic",
+  "responses": {
+    "basic.name": "Alex Example",
+    "basic.email": "alex@example.com",
+    "required.role": "Software Engineer",
+    "summary.items": [
+      "Builds reusable workflow tooling.",
+      "Turns structured intake into production-ready artifacts."
+    ],
+    "project[].bullets": [
+      "Published synthetic examples that explain the resume workflow end to end.",
+      "Turned structured intake data into reusable rendering and validation fixtures."
+    ]
+  },
+  "updatedAt": "2026-04-11T10:00:00Z"
+}

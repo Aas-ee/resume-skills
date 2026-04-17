@@ -16,14 +16,32 @@ Use it when you need to:
 
 ## Core rule
 
-Treat `resume_runtime/` as the primary shared interface.
+This installed skill bundle is self-contained.
+
+When the skill is installed correctly, this directory should contain:
+- `template_catalog_cli.py`
+- `template_store_cli.py`
+- `agent_intake_cli.py`
+- `host_cli.py`
+- `render_cli.py`
+- `resume_runtime/`
+- `resume_core/examples/`
+
+Treat the bundled `resume_runtime/` under this skill directory as the primary shared interface.
 
 Use these public entrypoints:
-- `resume_runtime/template_catalog_cli.py` — list built-in and stored templates and derive `template_context`
-- `resume_runtime/template_store_cli.py` — save personal templates and promote candidate templates
-- `resume_runtime/agent_intake_cli.py` — host-facing outer intake entrypoint
-- `resume_runtime/host_cli.py` — lower-level structured session control
-- `resume_runtime/render_cli.py` — render markdown/html/css output bundles from a manifest and profile
+- `template_catalog_cli.py` — list built-in and stored templates and derive `template_context`
+- `template_store_cli.py` — save personal templates and promote candidate templates
+- `agent_intake_cli.py` — host-facing outer intake entrypoint
+- `host_cli.py` — lower-level structured session control
+- `render_cli.py` — render markdown/html/css output bundles from a manifest and profile
+
+Equivalent bundled module paths also exist under:
+- `resume_runtime/template_catalog_cli.py`
+- `resume_runtime/template_store_cli.py`
+- `resume_runtime/agent_intake_cli.py`
+- `resume_runtime/host_cli.py`
+- `resume_runtime/render_cli.py`
 
 Claude-specific wrappers under `.claude/skills/resume/` are compatibility adapters, not the primary shared contract.
 
@@ -33,26 +51,38 @@ Claude-specific wrappers under `.claude/skills/resume/` are compatibility adapte
 
 Before parsing materials or asking for missing information, choose a template.
 
-- In this repository, built-in template manifests live under `resume_core/examples/templates/`
+- In the installed skill bundle, built-in template manifests live under `resume_core/examples/templates/`
 - Built-in template assets, including CSS, live under `resume_core/examples/template-assets/`
 - The current built-in templates are `typora-classic` and `markdown-basic`
-- load built-in and stored templates through `resume_runtime/template_catalog_cli.py`
+- load built-in and stored templates through `template_catalog_cli.py`
 - read `asset_paths` from the catalog CLI response when you need the concrete markdown/html/css file locations for a template
 - show template cards with template id, style, use cases, and required-content summary
 - let the user choose a built-in template, a stored template, upload a new template, or ask for a derivative template
-- once a template is chosen, use the returned `manifest` + derived `checklist` as the `template_context` for `resume_runtime/agent_intake_cli.py`
+- once a template is chosen, use the returned `manifest` + derived `checklist` as the `template_context` for `agent_intake_cli.py`
 
-If you are running inside this repository, enumerate built-in templates with:
+If you know the absolute path of this installed skill directory, enumerate built-in templates with:
 
 ```bash
-python3 resume_runtime/template_catalog_cli.py
+python3 /path/to/installed/skill/template_catalog_cli.py
+```
+
+If you are already in the installed skill directory, you can also run:
+
+```bash
+python3 template_catalog_cli.py
+```
+
+If you are developing inside this repository root, the bundled entrypoint is:
+
+```bash
+python3 skills/resume/template_catalog_cli.py
 ```
 
 You can still override the defaults when needed:
 
 ```bash
-python3 resume_runtime/template_catalog_cli.py \
-  --examples-root resume_core/examples \
+python3 /path/to/installed/skill/template_catalog_cli.py \
+  --examples-root /path/to/installed/skill/resume_core/examples \
   --generated-at 2026-04-16T12:00:00Z
 ```
 

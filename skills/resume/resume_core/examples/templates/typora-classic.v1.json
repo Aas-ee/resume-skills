@@ -1,0 +1,45 @@
+{
+  "templateId": "typora-classic",
+  "name": "Typora Classic Resume",
+  "version": "1.0.0",
+  "description": "Typora-first professional resume template with markdown plus HTML tables and print-oriented CSS.",
+  "target": "typora",
+  "sectionOrder": ["header", "summary", "skills", "work", "projects", "education"],
+  "fieldRequirements": [
+    {"fieldId": "basic.name", "required": true, "repeatable": false, "order": 10, "promptHint": "Name shown in the first header row"},
+    {"fieldId": "basic.nameEn", "required": false, "repeatable": false, "order": 20, "promptHint": "Optional second-language name shown beside the main name"},
+    {"fieldId": "basic.phone", "required": false, "repeatable": false, "order": 30, "promptHint": "Phone number shown in the contact rows"},
+    {"fieldId": "basic.email", "required": true, "repeatable": false, "order": 40, "promptHint": "Primary email shown in the contact rows"},
+    {"fieldId": "links.github", "required": false, "repeatable": false, "order": 50, "promptHint": "GitHub or portfolio link if it strengthens the resume"},
+    {"fieldId": "required.role", "required": true, "repeatable": false, "order": 60, "promptHint": "Target role or direction shown in the final header row"},
+    {"fieldId": "summary.items", "required": false, "repeatable": true, "order": 70, "promptHint": "Two or more short summary bullets"},
+    {"fieldId": "skills.items", "required": false, "repeatable": true, "order": 80, "promptHint": "Repeatable skill lines that stay profession-neutral"},
+    {"fieldId": "work[].date", "required": false, "repeatable": true, "order": 90, "promptHint": "Date range for each work experience row"},
+    {"fieldId": "work[].company", "required": false, "repeatable": true, "order": 100, "promptHint": "Company or organization name for each work row"},
+    {"fieldId": "work[].role", "required": false, "repeatable": true, "order": 110, "promptHint": "Role title for each work row"},
+    {"fieldId": "work[].bullets", "required": false, "repeatable": true, "order": 120, "promptHint": "Bullets describing responsibilities or impact for each work entry"},
+    {"fieldId": "project[].date", "required": true, "repeatable": true, "order": 130, "promptHint": "Date range shown in the project table"},
+    {"fieldId": "project[].name", "required": true, "repeatable": true, "order": 140, "promptHint": "Project or initiative name"},
+    {"fieldId": "project[].role", "required": true, "repeatable": true, "order": 150, "promptHint": "Role label shown on the project row"},
+    {"fieldId": "project[].techStack", "required": false, "repeatable": true, "order": 160, "promptHint": "Short stack or descriptor line shown in the meta row"},
+    {"fieldId": "project[].bullets", "required": true, "repeatable": true, "order": 170, "promptHint": "Bullets describing contribution and impact"},
+    {"fieldId": "education[].date", "required": false, "repeatable": true, "order": 180, "promptHint": "Date range for each education entry"},
+    {"fieldId": "education[].school", "required": true, "repeatable": true, "order": 190, "promptHint": "School name for each education entry"},
+    {"fieldId": "education[].degree", "required": true, "repeatable": true, "order": 200, "promptHint": "Degree label for each education entry"},
+    {"fieldId": "education[].major", "required": true, "repeatable": true, "order": 210, "promptHint": "Major for each education entry"}
+  ],
+  "renderSpecRef": "renderers/typora-classic@1.0.0",
+  "origin": "builtin",
+  "assetRefs": {
+    "markdown": "../template-assets/typora-classic/template.md",
+    "html": "../template-assets/typora-classic/template.html",
+    "css": "../template-assets/typora-classic/style.css"
+  },
+  "previewCard": {
+    "title": "Typora Classic Resume",
+    "styleLabel": "Typora-first classic print layout",
+    "useCases": ["通用简历", "Typora 预览", "项目导向简历"],
+    "requiredContentSummary": ["姓名和邮箱", "求职方向", "至少一个项目"]
+  },
+  "storageScope": "builtin"
+}

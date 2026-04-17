@@ -1,0 +1,47 @@
+{
+  "profileId": "sample-ai-agent-profile",
+  "fieldValues": {
+    "basic.name": "Alex Example",
+    "basic.nameEn": "Alex Example",
+    "basic.phone": "+1 555-0100",
+    "basic.email": "alex@example.com",
+    "required.role": "Software Engineer",
+    "links.github": "https://github.com/alex-example",
+    "summary.items": [
+      "Builds reusable workflow tooling.",
+      "Turns structured intake into production-ready artifacts."
+    ],
+    "skills.items": [
+      "Engineering: Python / TypeScript / CLI tooling",
+      "Platforms: Resume workflows / template packaging / render pipelines"
+    ],
+    "work[].date": ["2024.01 - Present"],
+    "work[].company": ["Example Labs"],
+    "work[].role": ["Software Engineer"],
+    "work[].bullets": [[
+      "Built shared runtime flows for multiple hosts.",
+      "Improved validation coverage for synthetic public fixtures."
+    ]],
+    "education[].date": ["2018.09 - 2022.06"],
+    "education[].school": ["Example University"],
+    "education[].degree": ["BSc"],
+    "education[].major": ["Computer Science"],
+    "project[].date": ["2025.01 - Present"],
+    "project[].name": ["Example Stream"],
+    "project[].role": ["Open Source Maintainer"],
+    "project[].techStack": [["TypeScript", "Node.js", "Express", "CLI", "Automation"]],
+    "project[].bullets": [[
+      "Published synthetic examples that explain the resume workflow end to end.",
+      "Turned structured intake data into reusable rendering and validation fixtures."
+    ]]
+  },
+  "provenance": {
+    "basic.name": ["extract-basic-name"],
+    "links.github": ["extract-github-link"],
+    "project[].name": ["extract-project-name"],
+    "project[].role": ["extract-project-role"],
+    "project[].techStack": ["extract-project-tech-stack"]
+  },
+  "profileStatus": "partial",
+  "updatedAt": "2026-04-16T12:30:00Z"
+}

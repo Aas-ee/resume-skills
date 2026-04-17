@@ -1,0 +1,96 @@
+<div class="resume-page">
+
+<table class="resume-header">
+  <tr>
+    <td class="label name">{{basic.name}}</td>
+    <td class="value name">{{basic.nameEn}}</td>
+  </tr>
+  {{#basic.phone}}
+  <tr>
+    <td class="label">Phone</td>
+    <td class="value">{{basic.phone}}</td>
+  </tr>
+  {{/basic.phone}}
+  <tr>
+    <td class="label">Email</td>
+    <td class="value">{{basic.email}}</td>
+  </tr>
+  {{#links.github}}
+  <tr>
+    <td class="label">Link</td>
+    <td class="value"><a href="{{links.github}}">{{links.github}}</a></td>
+  </tr>
+  {{/links.github}}
+  <tr>
+    <td class="label">Target Role</td>
+    <td class="value emphasis">{{required.role}}</td>
+  </tr>
+</table>
+
+## Summary
+
+{{#summary.items}}
+- {{.}}
+{{/summary.items}}
+
+## Skills
+
+{{#skills.items}}
+- {{.}}
+{{/skills.items}}
+
+{{#work}}
+## Work Experience
+
+<table class="entry-table work-table">
+  <tr>
+    <td class="date">{{date}}</td>
+    <td class="main">{{company}}</td>
+    <td class="side">{{role}}</td>
+  </tr>
+</table>
+
+{{#bullets}}
+- {{.}}
+{{/bullets}}
+{{/work}}
+
+## Featured Projects
+
+{{#project}}
+<table class="entry-table project-table">
+  <tr>
+    <td class="date">{{date}}</td>
+    <td class="main">{{name}}</td>
+    <td class="side">{{role}}</td>
+  </tr>
+  {{#techStack}}
+  <tr class="meta-row">
+    <td class="meta" colspan="3">Tech Stack: {{techStack}}</td>
+  </tr>
+  {{/techStack}}
+</table>
+
+{{#bullets}}
+- {{.}}
+{{/bullets}}
+{{/project}}
+
+## Education
+
+{{#education}}
+<table class="entry-table edu-table">
+  <tr>
+    <td class="date">{{date}}</td>
+    <td class="main">{{school}}</td>
+    <td class="side">{{degree}}</td>
+  </tr>
+  <tr class="meta-row">
+    <td class="date"></td>
+    <td class="meta">{{major}}</td>
+    <td class="side"></td>
+  </tr>
+</table>
+{{/education}}
+
+</div>

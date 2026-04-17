@@ -1,0 +1,175 @@
+{
+  "catalogId": "resume-core-fields",
+  "version": "1.0.0",
+  "fields": [
+    {
+      "fieldId": "basic.name",
+      "label": "Name",
+      "dataType": "string",
+      "cardinality": "one",
+      "path": "basic.name",
+      "description": "Candidate display name"
+    },
+    {
+      "fieldId": "basic.nameEn",
+      "label": "English name",
+      "dataType": "string",
+      "cardinality": "one",
+      "path": "basic.nameEn",
+      "description": "Optional second-language name shown in the header"
+    },
+    {
+      "fieldId": "basic.phone",
+      "label": "Phone",
+      "dataType": "string",
+      "cardinality": "one",
+      "path": "basic.phone",
+      "description": "Primary contact phone number"
+    },
+    {
+      "fieldId": "basic.email",
+      "label": "Email",
+      "dataType": "email",
+      "cardinality": "one",
+      "path": "basic.email",
+      "description": "Primary contact email"
+    },
+    {
+      "fieldId": "required.role",
+      "label": "Target role",
+      "dataType": "string",
+      "cardinality": "one",
+      "path": "required.role",
+      "description": "Target role or direction shown in the resume header"
+    },
+    {
+      "fieldId": "links.github",
+      "label": "GitHub",
+      "dataType": "url",
+      "cardinality": "one",
+      "path": "links.github",
+      "description": "Primary GitHub profile link",
+      "aliases": ["github", "GitHub"]
+    },
+    {
+      "fieldId": "summary.items",
+      "label": "Summary bullets",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "summary.items",
+      "description": "Short summary bullets shown near the top of the resume"
+    },
+    {
+      "fieldId": "skills.items",
+      "label": "Skills lines",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "skills.items",
+      "description": "Repeatable skill lines shown in the skills section"
+    },
+    {
+      "fieldId": "work[].date",
+      "label": "Work date",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "work[].date",
+      "description": "Date range for each work entry"
+    },
+    {
+      "fieldId": "work[].company",
+      "label": "Work company",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "work[].company",
+      "description": "Company or organization name for each work entry"
+    },
+    {
+      "fieldId": "work[].role",
+      "label": "Work role",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "work[].role",
+      "description": "Role title for each work entry"
+    },
+    {
+      "fieldId": "work[].bullets",
+      "label": "Work bullets",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "work[].bullets",
+      "description": "Bullet list describing responsibilities or impact for each work entry"
+    },
+    {
+      "fieldId": "education[].date",
+      "label": "Education date",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].date",
+      "description": "Date range for each education entry"
+    },
+    {
+      "fieldId": "education[].school",
+      "label": "Education school",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].school",
+      "description": "School name for each education entry"
+    },
+    {
+      "fieldId": "education[].major",
+      "label": "Education major",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].major",
+      "description": "Major or field of study for each education entry"
+    },
+    {
+      "fieldId": "education[].degree",
+      "label": "Education degree",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "education[].degree",
+      "description": "Degree label for each education entry"
+    },
+    {
+      "fieldId": "project[].date",
+      "label": "Project date",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "project[].date",
+      "description": "Date range for each project entry"
+    },
+    {
+      "fieldId": "project[].name",
+      "label": "Project name",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "project[].name",
+      "description": "Project title for each project entry"
+    },
+    {
+      "fieldId": "project[].role",
+      "label": "Project role",
+      "dataType": "string",
+      "cardinality": "many",
+      "path": "project[].role",
+      "description": "Role or responsibility label for each project entry"
+    },
+    {
+      "fieldId": "project[].techStack",
+      "label": "Project tech stack",
+      "dataType": "list",
+      "cardinality": "many",
+      "path": "project[].techStack",
+      "description": "Key technologies associated with each project entry"
+    },
+    {
+      "fieldId": "project[].bullets",
+      "label": "Project bullets",
+      "dataType": "richtext",
+      "cardinality": "many",
+      "path": "project[].bullets",
+      "description": "Bullet list describing contribution and impact for each project"
+    }
+  ]
+}

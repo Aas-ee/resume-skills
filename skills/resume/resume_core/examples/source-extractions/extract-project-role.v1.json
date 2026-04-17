@@ -1,0 +1,11 @@
+{
+  "extractionId": "extract-project-role",
+  "documentId": "source-existing-resume-md",
+  "fragmentText": "Open Source Maintainer",
+  "sourceLocator": {
+    "kind": "line-range",
+    "value": "6-6"
+  },
+  "candidateFieldIds": ["project[].role"],
+  "confidence": 0.95
+}

@@ -1,0 +1,20 @@
+{
+  "registryId": "resume-template-registry",
+  "entries": [
+    {
+      "templateId": "typora-classic",
+      "version": "1.0.0",
+      "source": "builtin",
+      "visibility": "official",
+      "status": "active"
+    },
+    {
+      "templateId": "markdown-basic",
+      "version": "1.0.0",
+      "source": "builtin",
+      "visibility": "official",
+      "status": "active"
+    }
+  ],
+  "defaultTemplateId": "typora-classic"
+}

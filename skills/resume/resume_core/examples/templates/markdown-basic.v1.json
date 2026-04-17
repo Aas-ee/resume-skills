@@ -1,0 +1,94 @@
+{
+  "templateId": "markdown-basic",
+  "name": "Markdown Basic Resume",
+  "version": "1.0.0",
+  "description": "Plain Markdown resume template that can be rendered without Typora-specific HTML blocks.",
+  "target": "markdown",
+  "sectionOrder": ["header", "summary", "education", "projects"],
+  "fieldRequirements": [
+    {
+      "fieldId": "basic.name",
+      "required": true,
+      "repeatable": false,
+      "order": 10,
+      "promptHint": "Candidate name in the Markdown title"
+    },
+    {
+      "fieldId": "basic.email",
+      "required": true,
+      "repeatable": false,
+      "order": 20,
+      "promptHint": "Primary email below the title"
+    },
+    {
+      "fieldId": "links.github",
+      "required": false,
+      "repeatable": false,
+      "order": 30,
+      "promptHint": "Optional GitHub link below the title"
+    },
+    {
+      "fieldId": "summary.items",
+      "required": false,
+      "repeatable": true,
+      "order": 40,
+      "promptHint": "Short summary bullets"
+    },
+    {
+      "fieldId": "education[].school",
+      "required": true,
+      "repeatable": true,
+      "order": 50,
+      "promptHint": "School name"
+    },
+    {
+      "fieldId": "education[].major",
+      "required": true,
+      "repeatable": true,
+      "order": 60,
+      "promptHint": "Major name"
+    },
+    {
+      "fieldId": "education[].degree",
+      "required": true,
+      "repeatable": true,
+      "order": 70,
+      "promptHint": "Degree label"
+    },
+    {
+      "fieldId": "project[].name",
+      "required": true,
+      "repeatable": true,
+      "order": 80,
+      "promptHint": "Project title"
+    },
+    {
+      "fieldId": "project[].role",
+      "required": true,
+      "repeatable": true,
+      "order": 90,
+      "promptHint": "Project role label"
+    },
+    {
+      "fieldId": "project[].bullets",
+      "required": true,
+      "repeatable": true,
+      "order": 100,
+      "promptHint": "Project bullets"
+    }
+  ],
+  "renderSpecRef": "renderers/markdown-basic@1.0.0",
+  "origin": "user-promoted",
+  "assetRefs": {
+    "markdown": "../template-assets/markdown-basic/template.md",
+    "html": "../template-assets/markdown-basic/template.html",
+    "css": "../template-assets/markdown-basic/style.css"
+  },
+  "previewCard": {
+    "title": "Markdown Basic Resume",
+    "styleLabel": "Plain markdown with light styling",
+    "useCases": ["通用简历", "跨编辑器复用", "轻量主题"],
+    "requiredContentSummary": ["姓名和邮箱", "教育经历", "项目标题和项目描述"]
+  },
+  "storageScope": "builtin"
+}

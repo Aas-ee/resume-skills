@@ -184,6 +184,28 @@ class ResumeRuntimeImportTests(unittest.TestCase):
             )
         )
 
+    def test_legacy_template_catalog_cli_wrapper_runs_from_unrelated_cwd(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            completed = subprocess.run(
+                [
+                    sys.executable,
+                    str(LEGACY_TEMPLATE_CATALOG_CLI),
+                ],
+                cwd=temp_dir,
+                text=True,
+                capture_output=True,
+            )
+
+        self.assertEqual(
+            completed.returncode,
+            0,
+            msg=f"stdout:\n{completed.stdout}\n\nstderr:\n{completed.stderr}",
+        )
+        payload = json.loads(completed.stdout)
+        self.assertTrue(payload["ok"])
+        self.assertGreater(len(payload["entries"]), 0)
+        self.assertIn("asset_paths", payload["entries"][0])
+
     def test_legacy_template_store_cli_wrapper_runs_directly(self):
         request = {
             "version": "resume-template-store-cli/v1",

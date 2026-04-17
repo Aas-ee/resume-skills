@@ -1,0 +1,72 @@
+{
+  "projectionId": "follow-up-profile-projection-for-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "followUpResponseSetId": "follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "followUpQuestionSetId": "follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "reportId": "gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "baseProfileId": "profile-from-guided-intake-response-set-typora-classic",
+  "profile": {
+    "profileId": "profile-from-follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic",
+    "fieldValues": {
+      "basic.name": "Alex Example",
+      "basic.nameEn": "Alex Example",
+      "basic.phone": "+1 555-0100",
+      "basic.email": "alex@example.com",
+      "required.role": "Software Engineer",
+      "links.github": "https://github.com/alex-example",
+      "summary.items": [
+        "Builds reusable workflow tooling.",
+        "Turns structured intake into production-ready artifacts."
+      ],
+      "skills.items": [
+        "Engineering: Python / TypeScript / CLI tooling",
+        "Platforms: Resume workflows / template packaging / render pipelines"
+      ],
+      "work[].date": "2024.01 - Present",
+      "work[].company": "Example Labs",
+      "work[].role": "Software Engineer",
+      "work[].bullets": [
+        "Built shared runtime flows for multiple hosts.",
+        "Improved validation coverage for synthetic public fixtures."
+      ],
+      "project[].date": "2025.01 - Present",
+      "project[].name": "Example Stream",
+      "project[].role": "Open Source Maintainer",
+      "project[].techStack": ["TypeScript", "Node.js", "Express", "CLI", "Automation"],
+      "project[].bullets": [
+        "Published synthetic examples that explain the resume workflow end to end.",
+        "Turned structured intake data into reusable rendering and validation fixtures."
+      ],
+      "education[].date": "2018.09 - 2022.06",
+      "education[].school": "Example University",
+      "education[].degree": "BSc",
+      "education[].major": "Computer Science"
+    },
+    "provenance": {
+      "basic.name": ["guided-intake-response-set-typora-classic"],
+      "basic.nameEn": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "basic.phone": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "basic.email": ["guided-intake-response-set-typora-classic"],
+      "required.role": ["guided-intake-response-set-typora-classic"],
+      "links.github": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "summary.items": ["guided-intake-response-set-typora-classic"],
+      "skills.items": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "work[].date": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "work[].company": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "work[].role": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "work[].bullets": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].date": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].name": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].role": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].techStack": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "project[].bullets": ["guided-intake-response-set-typora-classic"],
+      "education[].date": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "education[].school": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "education[].degree": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"],
+      "education[].major": ["follow-up-response-for-follow-up-for-gap-for-profile-from-guided-intake-response-set-typora-classic-typora-classic"]
+    },
+    "profileStatus": "partial",
+    "updatedAt": "2026-04-12T10:00:00Z"
+  }
+}

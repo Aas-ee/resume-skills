@@ -1,0 +1,32 @@
+{
+  "projectionId": "guided-intake-profile-projection-typora-classic",
+  "responseSetId": "guided-intake-response-set-typora-classic",
+  "questionSetId": "guided-intake-question-set-typora-classic",
+  "templateId": "typora-classic",
+  "templateVersion": "1.0.0",
+  "profile": {
+    "profileId": "profile-from-guided-intake-response-set-typora-classic",
+    "fieldValues": {
+      "basic.name": "Alex Example",
+      "basic.email": "alex@example.com",
+      "required.role": "Software Engineer",
+      "summary.items": [
+        "Builds reusable workflow tooling.",
+        "Turns structured intake into production-ready artifacts."
+      ],
+      "project[].bullets": [
+        "Published synthetic examples that explain the resume workflow end to end.",
+        "Turned structured intake data into reusable rendering and validation fixtures."
+      ]
+    },
+    "provenance": {
+      "basic.name": ["guided-intake-response-set-typora-classic"],
+      "basic.email": ["guided-intake-response-set-typora-classic"],
+      "required.role": ["guided-intake-response-set-typora-classic"],
+      "summary.items": ["guided-intake-response-set-typora-classic"],
+      "project[].bullets": ["guided-intake-response-set-typora-classic"]
+    },
+    "profileStatus": "partial",
+    "updatedAt": "2026-04-11T10:00:00Z"
+  }
+}

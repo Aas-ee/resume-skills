@@ -38,6 +38,15 @@ Inside this repository it can be run without extra arguments:
 python3 .claude/skills/resume/template_catalog_cli.py
 ```
 
+Do not assume the current working directory is this repository root.
+If Claude is operating from another workspace, invoke the wrapper by absolute path instead of using a cwd-relative repo path.
+
+Example:
+
+```bash
+python3 /abs/path/to/resume-skills/.claude/skills/resume/template_catalog_cli.py
+```
+
 The response shape matches the public runtime contract, including:
 - `card`
 - `template_context`
