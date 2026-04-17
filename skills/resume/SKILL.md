@@ -117,6 +117,7 @@ For structured intake and follow-up:
 
 When enough information is available:
 - produce the resume draft that matches the selected template’s required structure
+- localize section headings, field labels, and fixed template copy to match the user’s language; Chinese requests should render Chinese labels by default
 - preserve evidence-based wording and truthful ownership
 - list any remaining missing facts explicitly instead of guessing
 

@@ -1,4 +1,5 @@
 import json
+import re
 import subprocess
 import sys
 import tempfile
@@ -51,6 +52,10 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertIn('<table class="resume-header">', bundle["markdown"])
         self.assertIn("Software Engineer", bundle["markdown"])
         self.assertIn("Engineering: Python / TypeScript / CLI tooling", bundle["markdown"])
+        self.assertIn("## 个人总结", bundle["markdown"])
+        self.assertIn("## 专业技能", bundle["markdown"])
+        self.assertIn("## 项目经历", bundle["markdown"])
+        self.assertIn("邮箱", bundle["markdown"])
         self.assertIn('<table class="entry-table work-table">', bundle["markdown"])
         self.assertIn("Example Labs", bundle["markdown"])
         self.assertIn('<table class="entry-table project-table">', bundle["markdown"])
@@ -58,7 +63,28 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertIn("TypeScript, Node.js, Express, CLI, Automation", bundle["markdown"])
         self.assertIn('<table class="resume-header">', bundle["html"])
         self.assertIn('<table class="entry-table project-table">', bundle["html"])
+        self.assertIn("个人总结", bundle["html"])
+        self.assertIn("教育经历", bundle["html"])
         self.assertIn("font-family", bundle["css"])
+
+    def test_typora_markdown_does_not_insert_blank_lines_inside_header_table(self):
+        entry = load_typora_entry()
+        profile = load_json(PROFILE_PATH)
+
+        bundle = render_template_bundle(
+            manifest=entry.manifest,
+            manifest_path=entry.manifestPath,
+            profile=profile,
+        )
+
+        header_table_match = re.search(
+            r'<table class="resume-header">(.*?)</table>',
+            bundle["markdown"],
+            re.DOTALL,
+        )
+        self.assertIsNotNone(header_table_match)
+        header_table = header_table_match.group(1)
+        self.assertNotRegex(header_table, r"</tr>\s*\n\s*\n\s*<tr")
 
     def test_build_template_context_groups_expanded_profile_fields(self):
         profile = load_json(PROFILE_PATH)
@@ -142,7 +168,11 @@ class TemplateRendererTests(unittest.TestCase):
         self.assertIn('{{#work}}', markdown_template)
         self.assertIn('{{date}}', markdown_template)
         self.assertIn('{{#project}}', markdown_template)
+        self.assertIn('## 个人总结', markdown_template)
+        self.assertIn('求职方向', markdown_template)
         self.assertIn('class="entry-table project-table"', html_template)
+        self.assertIn('个人总结', html_template)
+        self.assertIn('技术栈：', html_template)
         self.assertIn('--accent', css_text)
         self.assertIn('.entry-table .date', css_text)
 

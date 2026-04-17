@@ -3,20 +3,20 @@
 {{basic.email}}
 {{#links.github}}{{links.github}}{{/links.github}}
 
-## Summary
+## 个人总结
 {{#summary.items}}
 - {{.}}
 {{/summary.items}}
 
-## Education
+## 教育经历
 {{#education}}
 - {{school}} · {{degree}} · {{major}}
 {{/education}}
 
-## Projects
+## 项目经历
 {{#project}}
 ### {{name}}
-Role: {{role}}
+角色：{{role}}
 {{#bullets}}
 - {{.}}
 {{/bullets}}

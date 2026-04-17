@@ -4,43 +4,39 @@
   <tr>
     <td class="label name">{{basic.name}}</td>
     <td class="value name">{{basic.nameEn}}</td>
-  </tr>
-  {{#basic.phone}}
+  </tr>{{#basic.phone}}
   <tr>
-    <td class="label">Phone</td>
+    <td class="label">电话</td>
     <td class="value">{{basic.phone}}</td>
-  </tr>
-  {{/basic.phone}}
+  </tr>{{/basic.phone}}
   <tr>
-    <td class="label">Email</td>
+    <td class="label">邮箱</td>
     <td class="value">{{basic.email}}</td>
-  </tr>
-  {{#links.github}}
+  </tr>{{#links.github}}
   <tr>
-    <td class="label">Link</td>
+    <td class="label">链接</td>
     <td class="value"><a href="{{links.github}}">{{links.github}}</a></td>
-  </tr>
-  {{/links.github}}
+  </tr>{{/links.github}}
   <tr>
-    <td class="label">Target Role</td>
+    <td class="label">求职方向</td>
     <td class="value emphasis">{{required.role}}</td>
   </tr>
 </table>
 
-## Summary
+## 个人总结
 
 {{#summary.items}}
 - {{.}}
 {{/summary.items}}
 
-## Skills
+## 专业技能
 
 {{#skills.items}}
 - {{.}}
 {{/skills.items}}
 
 {{#work}}
-## Work Experience
+## 工作经历
 
 <table class="entry-table work-table">
   <tr>
@@ -55,7 +51,7 @@
 {{/bullets}}
 {{/work}}
 
-## Featured Projects
+## 项目经历
 
 {{#project}}
 <table class="entry-table project-table">
@@ -66,7 +62,7 @@
   </tr>
   {{#techStack}}
   <tr class="meta-row">
-    <td class="meta" colspan="3">Tech Stack: {{techStack}}</td>
+    <td class="meta" colspan="3">技术栈：{{techStack}}</td>
   </tr>
   {{/techStack}}
 </table>
@@ -76,7 +72,7 @@
 {{/bullets}}
 {{/project}}
 
-## Education
+## 教育经历
 
 {{#education}}
 <table class="entry-table edu-table">

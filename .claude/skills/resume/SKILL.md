@@ -58,6 +58,7 @@ Recommended template discovery sequence inside Claude:
 3. Read `entries[].asset_paths` when you need the concrete CSS, HTML, or Markdown asset files
 4. After the user chooses a template, pass `entries[].template_context` into `.claude/skills/resume/agent_intake_cli.py` or the public `resume_runtime/agent_intake_cli.py`
 5. Only fall back to direct rewrite without template selection when the task is explicitly a pure rewrite request
+6. Match fixed section headings and field labels to the user's language; Chinese requests should not keep English template headings in the final resume
 
 ## Claude-specific operating rules
 

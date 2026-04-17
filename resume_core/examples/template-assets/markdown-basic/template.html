@@ -2,15 +2,15 @@
   <h1>{{basic.name}}</h1>
   <p>{{basic.email}}</p>
   {{#links.github}}<p>{{links.github}}</p>{{/links.github}}
-  <h2>Summary</h2>
+  <h2>个人总结</h2>
   <ul>{{#summary.items}}<li>{{.}}</li>{{/summary.items}}</ul>
-  <h2>Education</h2>
+  <h2>教育经历</h2>
   <ul>{{#education}}<li>{{school}} · {{degree}} · {{major}}</li>{{/education}}</ul>
-  <h2>Projects</h2>
+  <h2>项目经历</h2>
   {{#project}}
   <section>
     <h3>{{name}}</h3>
-    <p>Role: {{role}}</p>
+    <p>角色：{{role}}</p>
     <ul>{{#bullets}}<li>{{.}}</li>{{/bullets}}</ul>
   </section>
   {{/project}}
